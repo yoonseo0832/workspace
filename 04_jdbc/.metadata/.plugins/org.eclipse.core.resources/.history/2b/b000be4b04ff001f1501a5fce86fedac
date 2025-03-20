@@ -1,0 +1,25 @@
+package com.kh.view;
+
+import java.util.Scanner;
+
+/*
+ * View
+ * 	: 사용자가 보게될 시작적인 요소(화면)
+ * 		출력 또는 입력
+ */
+public class MemberMenu {
+	// Scanner 객체 생성
+	Scanner sc = new Scanner(System.in);
+	/**
+	 * 메인 메뉴 : 사용자가 보게될 첫 화면
+	 */
+	public void mainMenu() {
+		System.out.println("======회원 관리 프로그램 =======");
+		System.out.println("1. 회원 추가");			//c(create)
+		System.out.println("2. 전체 회원 조회");
+		System.out.println("3. 회원 아이디로 검색");
+		System.out.println("4. 회원 정보 수정");
+		System.out.println("5. 회원 탈퇴");
+		System.out.println("9. 프로그램 종료");
+	}
+}

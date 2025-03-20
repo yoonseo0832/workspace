@@ -1,0 +1,12 @@
+package com.kh.controller;
+
+public class GameController {
+
+	public GameController() {}
+
+	public void selectAll() {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

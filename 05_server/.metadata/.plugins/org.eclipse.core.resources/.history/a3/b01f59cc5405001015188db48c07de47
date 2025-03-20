@@ -1,0 +1,22 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+	
+</style>
+<meta charset="UTF-8">
+<title>피자 주문 내역</title>
+</head>
+<body>
+	<h1>주문 내역</h1>
+	<%
+	String pizza = request.getParameter("pizza");
+	String[] topping = request.getParameterValues("topping");
+	String[] side = request.getParameterValues("side");
+		
+	%>
+	피자는 ${pizza}, 토핑은 ${topping}, 사이드는 ${side} 주문하셨습니다.
+</body>
+</html>

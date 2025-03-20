@@ -1,0 +1,160 @@
+package test;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.InvalidPropertiesFormatException;
+import java.util.Properties;
+
+public class TestRun {
+/*
+ * Properties  특징
+ * - Map 계열의 컬렉션 중 하나 -> key, value 형태로 데이터를 관리 및 저장
+ * - 문자열(String) 형태로 데이터 저장(숫자는 형변환 필요)
+ * 
+ * 사용하는 메소드
+ * 	- 값을 저장할 때 : setProperty(key, value)
+ * 	- 값을 꺼내올 때 : getProperty(key) -=> 키값에 해당하는 벨류를 리턴
+ * 	
+ * 파일로 저장 시 종류(확장자)
+ * 	- properties : load()
+ * 	- xml : 쿼리문 loadToXML()
+ */
+	public static void main(String[] args) {
+		// Properties 객체에 담긴 데이터를 파일로 저장
+		//saveProp();
+		
+		//JDBC 관련 설정 파일 만들기(저장)
+		//saveJdbcSetting();
+		
+		// JDBC 설정 파일 읽어오기
+		//readJdbcSetting();
+		
+		// 쿼리문을 저장 파일에서 읽어오기
+		readQueryFile();
+	}
+	public static void readQueryFile() {
+		Properties prop = new Properties();
+
+		try {
+			prop.loadFromXML(new FileInputStream("resources/query.xml"));
+			
+			String im = prop.getProperty("insertMember");
+			
+			String dm = prop.getProperty("deleteMember");
+			String um = prop.getProperty("updateMember");
+			String sa = prop.getProperty("selectAll");
+				
+			System.out.println(im+"\n"+dm+"\n"+um+"\n"+sa);
+			
+		} catch (InvalidPropertiesFormatException e) {
+			e.printStackTrace();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+			
+		
+
+	}
+	/**
+	 * JDBC 설정 파일 내용 읽어오기
+	 * 
+	 * - properties 형식의 파일 내용 읽기 : load(InputStream)
+	 */
+	public static void readJdbcSetting() {	
+		Properties prop = new Properties();
+		
+		try {
+			// 파일로 부터 데이터를 읽어와서 Properties 객체에 담기
+			prop.load(new FileInputStream("resources/settings.properties"));
+			
+			// Properties 
+			String driver = prop.getProperty("driver");
+			String url = prop.getProperty("url");
+			String username = prop.getProperty("username");
+			String pwd = prop.getProperty("password");
+			System.out.println("driver ==> "+ driver);
+			System.out.println("url ==> "+ url);
+			System.out.println("username ==> "+ username);
+			System.out.println("password ==> "+ pwd);
+			
+			/* 
+			키값명을 모를때 찾는 방법
+			for(Object key : prop.keySet()) {
+				System.out.println(key);
+			} 
+			*/
+		} catch (IOException e) {
+			e.printStackTrace();
+			System.out.println("설정 파일 읽는데 문제 발생");
+		}
+	}
+	/**
+	 * JDBC 관련 설정 정보를 파일에 저장
+	 * - driver : oracle.jdbc.driver.OracleDriver
+	 * - url : jdbc:oracle:thin:@ip주소:포트번호:sid (sqldeveloper 계정의 속성 정보)
+	 * - username : 사용자명(sql 계정)
+	 * - password : 사용자의 비밀번호
+	 */
+	public static void saveJdbcSetting() {
+		
+		Properties prop = new Properties();
+		
+		prop.setProperty("driver", "oracle.jdbc.driver.OracleDriver");
+		prop.setProperty("url", "jdbc:oracle:thin:@localhost:1521:xe");
+		prop.setProperty("username","C##JDBC");
+		prop.setProperty("password","JDBC");
+		
+		try {
+			prop.store(new FileOutputStream("resources/settings.properties"),"properties setting");
+			
+			prop.storeToXML(new FileOutputStream("resources/settings.xml"),"properties setting" );
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	/**
+	 * Properties 객체를 이용하여 데이터를 파일에 저장
+	 * 
+	 * 1) Properties 객체 생성
+	 * 2) 객체에 데이터 저장
+	 * 3) 객체에 저장된 데이터를 파일에 저장(출력) => 파일용 기반스트림 사용!
+	 */
+	public static void saveProp() {
+		// 1) Properties 객체 생성 => map계열
+		Properties prop = new Properties(); // java.util.Properties 경로 
+		
+		// 2) 객체에 데이터 저장(키값, 벨류값)
+		prop.setProperty("C", "INSERT"); // C: CREATE (데이터 추가/게시글 작성/회원 등록... 행위에는 INSERT 사용)
+		prop.setProperty("R", "SELETE"); // R: READ (데이터 조회/ 검색/상세페이지/게시글 목록 조회)
+		prop.setProperty("U", "UPDATE"); // U: UPDATE (데이터 수정/게시글 수정)
+		prop.setProperty("D", "DELETE"); // D: DELETE (데이터 삭제/게시글 삭제/회원 탈퇴)
+		// 회원탈퇴는 UPDATE와 DELETE 무엇을 사용할지 뫃름
+		
+		//3) 객체에 저장된 데이터를 파일에 출력(둘의 메소드가 다름store()와  storeToXML())
+		//		Properties 형식: store(OutputStream) ==> 설정들을 저장하기 위한 용도
+		//		xml 형식 : storeToXML(OutputStream) ==> SQL문들을 저장하기 위한 용도
+		
+		//properties 형식
+		try {
+			//Properties 형식
+			prop.store(new FileOutputStream("test.properties"), "Properties Test");
+			// 키값=밸류값 형태로 파일에 저장됨
+			
+			// xml 형식
+			prop.storeToXML(new FileOutputStream("test.xml"), "Properties Test");
+			/*
+			 * <entry key = "키값">밸류값</entry> 형태로 파일에 저장됨
+			 */
+			
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+}

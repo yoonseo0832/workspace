@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>POST 방식 테스트</title>
+</head>
+<body>
+	<h1>*Post Test*</h1>
+	<hr>
+
+	<h2>간단한 정보 입력</h2>
+
+	<form action="/1_servlet/test2.do" method="post">
+		<div>
+			<label for="userName">이름</label>
+			<!-- input:text#userName[name=userName]-->
+			<input type="text" name="userName" id="userName">
+		</div>
+		<!--div>{성별: }+(input:radio[name=gender]+lable)*2-->
+		<!--radio 특징 name 속성 같으면 하나만 선택 가능 기능
+		실제 전달되는 값은 value 속성에 입력
+	-->
+		<div>
+			성별: <input type="radio" name="gender" value="남자" id="genderM">
+			<lable for="genderM">남자</lable>
+
+			<input type="radio" name="gender" value="여자" id="genderF">
+			<lable for="genderF">여자</lable>
+		</div>
+		<!--div>label+input:number-->
+		<div>
+			<label for="age">나이</label>
+			<input type="number" name="age" id="age" value="20">
+		</div>
+		<!--div>label+select>option*5-->
+		<div><label for="address">주소</label>
+			<select name="address" id="address">
+				<option value="서울">서울</option>
+				<option value="인천">인천</option>
+				<option value="경기">경기</option>
+				<option value="제주">제주</option>
+				<option value="세종">세종</option>
+			</select>
+		</div>
+		<!--div>label+input:range-->
+		<div>
+			<label for="height">키</label>
+			<input type="range" name="height" id="height" min="120" max="200" value="160" step="5">
+		</div>
+
+		<div>좋아하는 음식:
+			<input type="checkbox" name="food" value="한식">한식
+			<input type="checkbox" name="food" value="중식">중식
+			<input type="checkbox" name="food" value="일식">일식
+			<input type="checkbox" name="food" value="분식">분식
+			<input type="checkbox" name="food" value="서양식">서양식
+		</div>
+		<br><br>
+		<input type="submit" value="Submit">
+		<input type="reset" value="Canel">
+	</form>
+</body>
+</html>

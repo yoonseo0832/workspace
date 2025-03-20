@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <style>
+        
+        p{display: none;}
+    </style>
+</head>
+
+<body>
+
+    <div>원산지는 어딘가요?</div>
+    <p>필리핀입니다.</p>
+
+    <div>반품 비용은 얼마인가요?</div>
+    <p>왕복 배송비 6000원입니다.</p>
+
+    <div>답변이 느려요</div>
+    <p>문의량이 많아 잠시만 기다려주시면 감사하겠습니다.</p>
+
+    <div>주문 취소 되나요?</div>
+    <p>제품 발송 전이라면 가능합니다.</p>
+
+    <script>
+
+        $(function() {
+            $("div").click(function() {
+                const $p = $(this).next();		// 다음 요소를 .next()로도 표현할 수 있음
+                if($p.css("display") == "none"){
+                	$p.slideDown();
+                } else {
+                	$p.slideToggle();
+                }
+            });
+        });
+    </script>
+
+   
+</body>
+
+</html>

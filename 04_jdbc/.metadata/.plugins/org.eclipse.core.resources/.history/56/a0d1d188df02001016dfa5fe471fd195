@@ -1,0 +1,11 @@
+package com.kh.model.vo;
+
+public class Game {
+	private String gameId;
+	private String title;
+	private String genre;
+	private String platform;
+	private String releaseDate;
+	
+	
+}

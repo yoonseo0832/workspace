@@ -1,0 +1,73 @@
+package com.kh.view;
+
+import java.util.Scanner;
+
+/*
+ * View
+ * 	: 사용자가 보게될 시작적인 요소(화면)
+ * 		출력 또는 입력
+ */
+public class MemberMenu {
+	// Scanner 객체 생성
+	Scanner sc = new Scanner(System.in);
+	/**
+	 * 메인 메뉴 : 사용자가 보게될 첫 화면
+	 */
+	public void mainMenu() {
+		while(true) {
+			System.out.println("======회원 관리 프로그램 =======");
+			System.out.println("1. 회원 추가");			// c(create)
+			System.out.println("2. 전체 회원 조회");		// r(read)
+			System.out.println("3. 회원 아이디로 검색");		// r(read)
+			System.out.println("4. 회원 정보 수정");		// u(update)
+			System.out.println("5. 회원 탈퇴");			// d(delete)
+			System.out.println("9. 프로그램 종료");
+			
+			System.out.print(">> 메뉴 번호: ");
+			int menu = sc.nextInt();
+			sc.nextLine();
+			
+			switch(menu) {
+			case 1:
+				// 추가
+				addMemberMenu();
+				break;
+			case 2:
+				// 전체 조회
+				break;
+			case 3:
+				//아이디로 검색
+				break;
+			case 4:
+				//수정
+				break;
+			case 5:
+				// 삭제/탈퇴
+				break;
+			case 9:
+				System.out.println("프로그램이 종료됩니다..");
+				return; // 메소드 종료
+			}
+		}
+	}
+	/**
+	 * 회원 추가 메뉴 : 아이디, 비밀번호, 성별, 나이 입력 받아 회원 등록
+	 */
+	private void addMemberMenu() {
+		System.out.print("아이디: ");
+		String id = sc.nextLine();
+		
+		System.out.print("비밀번호: ");
+		String pwd = sc.nextLine();
+		
+		System.out.print("성별(M/F): ");
+		char gender = sc.next().toUpperCase().charAt(0);
+		// 입력 받은 문자열을 대문자로 변환해서 첫번째 문자만 추출
+		
+		System.out.print("나이: ");
+		int age = sc.nextInt();
+		
+		//TODO 회원추가 요청 => Controller 객체에게
+		
+	}
+}

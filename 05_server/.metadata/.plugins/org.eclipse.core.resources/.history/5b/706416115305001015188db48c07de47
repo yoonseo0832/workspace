@@ -1,0 +1,6 @@
+package model.vo;
+
+public class OrderPizza {
+	private String pizza;
+	private String
+}

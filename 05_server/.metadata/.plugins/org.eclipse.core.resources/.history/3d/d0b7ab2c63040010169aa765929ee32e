@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>서블릿 시작!</title>
+<style>
+	h1{
+		color: pink;
+		background-color: black;
+		display: inline;
+	}
+</style>
+</head>
+<body>
+	<h1>안녕? 서블릿!</h1>
+</body>
+</html>

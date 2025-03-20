@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<header>
+		<h3>★ 나의 복습 페이지 ★</h3>
+	</header>
+	<nav>
+		<ul>
+			<!-- TODO: practice1_random.html 파일로 이동하기 위한 링크 생성 -->
+
+		</ul>
+	</nav>
+</body>
+</html>

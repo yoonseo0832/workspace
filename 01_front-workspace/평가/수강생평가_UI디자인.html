@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>수강생 평가</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+
+    <style>
+        /* 공통 */
+        body {
+            text-align: center;
+            background-color: whitesmoke;
+        }
+        
+        .wrap {font-family: Noto Sans KR;}
+        .wrap *{margin-bottom: 50px;
+        }
+
+        a{text-decoration: none;}
+
+        /* 타이틀 */
+        .title {
+            font-family: Do Hyeon;
+            padding: 20px 0px 20px 0px;
+        }
+        
+        .title a { color: darkblue; }
+
+
+        /* 테이블(표) */
+        .table-wrap, .counsel-wrap {margin-bottom: 100px;}
+        hr { margin-bottom: 50px; }
+
+        table {
+            width: 80%;
+            height: 250px;
+            font-size: 18px;
+            margin: auto;
+            border: 1px solid black;
+        }
+        table>caption{
+            margin-bottom: 50px;
+            font-weight: bold;}
+        
+        tr>th{background-color: #d3eaff;}
+        #table-title{background-color: #bccde7;}
+
+
+        /* 멀티미디어 */
+        .img {
+            margin: auto;
+            margin-bottom: 100px;
+        }
+
+
+        /* 상담 */
+        fieldset{width: 70%; margin:auto;}
+        .counsel-wrap * {margin: auto; margin-bottom: 30px;}
+        .counsel-wrap input{width: 150px;}
+        .counsel-wrap>h3{color: #1729ca;}
+        label, p{color: darkslateblue}
+
+        /* foot */
+        .foot{background-color: #cedbbc; 
+            width: 100%; height: 100px;
+        }
+        .foot>a{color: #294101; line-height: 5.5;}
+    </style>
+
+</head>
+
+
+<body>
+
+    <!-- 
+         [요구사항]
+        - 1개 이상의 병합이 들어간  표 사용 o
+        - 3개 이상의 멀티미디어 사용 o
+        - 7개 이상의 색상 사용 o
+        - 2개 이상의 폰트 사용 o
+        - 2개 이상의 하이퍼링크 사용 o
+        - 3종류 이상의 사용자 입력 요소 사용 o
+    -->
+
+    <div class="wrap">
+
+        <div class="title">
+            <h1>KH 정보 교육원</h1>
+            <h1>Front-end 개발자 과정</h1>
+            <a href="#frontend-table">▶ 과정 확인하기</a>
+        </div>
+
+        <hr>
+
+        <div class="img">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/s-fXONdppyU?si=G68jA0lM7MBjcpmg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe><br>
+            <img src="https://cdn.pixabay.com/photo/2018/02/22/18/21/laptop-3173613_1280.png" alt="노트북 이미지"
+                width="600px">
+            <img src="https://cdn.pixabay.com/photo/2018/08/12/13/54/code-3600810_1280.png" alt="프로그래밍 이미지"
+                width="400px"> 
+        </div>
+
+        <div class="table-wrap">
+            <table border="1" id="frontend-table">
+                <caption>프론트엔드 개발자 과정 학습 내용</caption>
+
+                    <tr>
+                        <th rowspan="4" id="table-title">FrontEnd<br>개발자<br>학습 과정</th>
+                        <th>과목명</th>
+                        <th>학습 기간</th>
+                        <th>학습 내용</th>
+                    </tr>
+
+                <tr>
+                    <td>HTML</td>
+                    <td>2024.12.31~2025.01.03</td>
+                    <td>HTML의 각종 태그(글자, 목록, 표, 영역, 미디어, 하이퍼링크, 폼 등)</td>
+
+                </tr>
+
+                <tr>
+                    <td>CSS</td>
+                    <td>2025.01.04~2025.01.08</td>
+                    <td>선택자, 글꼴/ 텍스트/ 영역/ 테두리/ 배경 관련 스타일, 애니메이션, 레이아웃 등</td>
+                </tr>
+
+                <tr>
+                    <td>JavaScript</td>
+                    <td>2025.01.09~2025.01.20</td>
+                    <td>자바스크립트에서의 변수, 함수, 객체, 데이터 입출력 등</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="counsel-wrap">
+            <h3>더 궁금하신 점이 있으신가요?</h3>
+            <form action="khacademy" method="get">
+                <fieldset>
+                    <legend> 상담 예약하기</legend>
+                    <label>이름 : <input type="text" name="name"></label> <br>
+                    <label>전화번호 : <input type="tel" name="tel"></label> <br>
+                    <p>상담 내용</p>
+                    <textarea name="counsel" rows="5" cols="100" 
+                    placeholder="상담하실 내용을 입력해 주세요."
+                    style="resize: none;"></textarea>
+                    <button type="submit">등록하기</button>
+                </fieldset>
+                
+            </form>
+        </div>
+
+        <div class="foot">
+            <a href="https://kh-academy.co.kr/" target="_blank">KH 정보교육원 사이트로 이동</a>
+        </div>
+    </div>
+</body>
+
+</html>

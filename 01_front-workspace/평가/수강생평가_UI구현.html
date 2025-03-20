@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>수강생평가 UI 구현</title>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+    <style>
+        /* 문서를 처음 로드하면 로그인 화면은 보이지 않는다. */
+        label { display: none;}
+
+        body *{margin: 5px;}
+        button{width: 100px; height: 25px;}
+        .area{color: red;}
+
+        fieldset{width: 600px;}
+    </style>
+</head>
+
+<body>
+
+    <button id="loginBtn">로그인</button> <button id="clsBtn">Close</button>
+
+    <fieldset>
+        <form action="test">
+            <label>아이디 : <input type="text" id="userId"></label>
+            <label>비밀번호 : <input type="password" id="userPwd"></label>
+            <div class="area"></div>
+        </form>
+    </fieldset>
+
+    <button id="loginBtn2">Login</button>
+
+    <script>
+
+        // - 화면 상단 '로그인' 버튼을 클릭하면 아이디, 비밀번호를 입력할 수 있는 로그인 화면이 나타난다.
+        $(function () {
+            $("#loginBtn").click(function () {
+                const $form = $("form > label");
+
+                if ($form.css("display") == "none") {
+                    $form.slideDown();
+                };
+            });
+        });
+
+        // - Close 버튼을 클릭하면 로그인 화면이 사라진다.
+        $(function () {
+            $("#clsBtn").click(function () {
+                const $form = $("form > label");
+
+                if ($form.css("display") != "none") {
+                    $form.slideUp();
+                };
+            });
+        });
+
+        // 패스워드 입력 요소를 클릭한 경우 "영문자 대/소문자, 특수문자, 숫자 포함 8 ~ 32자" 라는 메시지가 나오게 한다.
+        $(":password").click(function () {
+            alert("영문자 대/소문자, 특수문자, 숫자 포함 8 ~ 32자");
+        });
+
+
+        // - 아이디, 패스워드를 입력하지 않고 'Login' 버튼을 클릭한 경우 "이 입력란을 작성하세요." 라는 메시지가 입력 요소 하단에 나오게 한다.
+        $("#loginBtn2").click(function () {
+            const userId = $("#userId").val();
+            const userPwd = $("#userPwd").val();
+
+            if (userId == '' || userPwd == '') {
+                $(".area").text("이 입력란을 작성하세요.");
+            }
+        });
+    </script>
+</body>
+
+</html>

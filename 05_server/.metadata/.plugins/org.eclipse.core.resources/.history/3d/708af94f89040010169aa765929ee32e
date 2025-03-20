@@ -1,0 +1,19 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>응답용 페이지</title>
+</head>
+<body>
+	<!-- html 주석 -->
+	<%-- jsp 주석 --%>
+	<h1>@@@응답완료###</h1>
+	
+	<%-- 자바 코드 작성하기 --%>
+	<%
+		System.out.println("hi, jsp!?");
+	%>
+</body>
+</html>

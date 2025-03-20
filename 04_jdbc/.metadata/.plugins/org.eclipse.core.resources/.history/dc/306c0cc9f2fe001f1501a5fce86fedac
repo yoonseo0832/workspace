@@ -1,0 +1,124 @@
+package test;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+public class TestRun {
+	/*
+	 * JDBC용 객체
+	 * 
+	 * - Connection 겍체 : DB의 연결정보를 담고 있는 객체
+	 * - [Prepared] Statement : 연결된 DB에 SQL문을 전달하여 실행하고
+	 * 							그 결과를 받아주는 객체
+	 * - ResultSet : DQL(SELECT)문 실행 후 조회 결과를 담고 있는 객체
+	 * 
+	 * JDBC 과정 (순서 중요)
+	 * 	1) jdbc driver 등록 : 해당 DBMS(오라클)가 제공하는 클래스 등록
+	 * 	2) Connection 객체 생성 : 연결히고자 하는 DB정보를 전달하여 해당 DB와 연결하면서 생성
+	 * 			-> DB정보 : 접속 주소(url), 사용자명(username), 비밀번호(password)
+	 * 	3) Statement 객체 생성 : Connection 객체를 이용하여 생성
+	 * 							SQL문을 실행하고 결과를 받을 것임!
+	 * 	4) SQL문을 DB에 전달하여 실행 : Statement 객체 사용
+	 * 	5) 실행 결과를 받기(저장)
+	 * 		- 1) DQL(SELECT)문 실행 -> ResultSet 객체 (=> 조회된 데이터들이 담겨있음)
+	 * 		- 2) DML 실행 : int (=> 처리된 행 수) {commit | rollback}
+	 * 	6) 결과에 대해 처리
+	 * 		- 1) ResultSet 객체에 담겨져 있는 데이터들을 하나하나 꺼내서 VO객체에 옮겨 담기(저장)
+	 * 		- 2) 트랜잭션 처리 (실행에 성공 - COMMIT , 실패한 경우 - ROLLBACK)
+	 * 	7) 사용 후 JDBC용 객체들을 반납 (close)
+	 * 		-> 생성 역순으로 close!! {마지막에 생성한 것을 먼저 닫고, 처음에 생성한 것은 마지막에 닫음}
+	 */
+	public static void main(String[] args) {
+		// TEST 테이블에 데이터 추가
+		//insertTest();
+		// TEST 테이블에서 데이터 조회
+		selectTest();
+	}
+	public static void selectTest() {
+		// DQL(SELECT) ---> ResultSet 객체 --> 데이터 하나하나 추출하여 저장(트랜잭션 불필요)
+		
+		// 필요한 객체 대한 변수 선언
+		Connection conn =null;
+		Statement stat =null;
+		ResultSet rset = null;
+		
+		try {
+			// 1) jdbc 드라이버 등록
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			
+			// 2) Connection 객체 생성
+			String url = "jdbc:oracle:thin:@localhost:1521:xe"; // 접속 주소
+			String username="C##JDBC";	// 사용자명
+			String password="JDBC";		// 비밀번호
+			
+			conn = DriverManager.getConnection(url, username, password);
+			
+			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	public static void insertTest() {
+		// DML(insert) => int (처리된 행 수) ---> 트랜잭션 처리 (commit|rollback)
+		//finally 부분에서 close() 처리하기 위해 변수 선언 위치를 try문 밖에 선언
+		Connection conn = null;
+		Statement stat = null;
+		try {
+			// 1) jdbc driver 등록
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			System.out.println("*오라클 드라이버 등록 완료*");
+			
+			// 2) Connection 객체 생성
+			// 연결할 데이터베이스 정보(url, username, password)
+			 conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe"
+															, "C##JDBC"
+															, "JDBC");
+			System.out.println("*CONNECTION 객체 생성 완료*"); // 오라클 DB 접속 성공
+			conn.setAutoCommit(false); // 자동커밋(auto commit) 설정을 off하는 것, jdbc6 이후 AutoCommit 설정되어 있음
+			//사용자명/비밀번호가 부적합, 로그온할 수 없습니다.
+			//The Network Adapter could not establish the connection
+			
+			// 3) Statement 객체 생성
+			stat = conn.createStatement();
+			
+			// 4, 5) SQL 실행하고 결과 받기 (int)
+			String sql = "INSERT INTO TEST VALUES(2, '이윤서', SYSDATE)";
+			// => 완성된 형태의 sql문 작성 (-> sql developer 에서 실행해도 정상 동작되는 상태) = 오류없이
+			// 주의 : => sql끝에 세미콜론이 없어야 함!!!!!
+			
+			int result = stat.executeUpdate(sql);
+			
+			// 6) 트랜잭션처리 (DML 실행 시)
+			// 	sql문 실행 성공 시 commit, 실행 실패 시 rollback
+			if (result > 0) {
+				//sql문 실행 성공 시 commit
+				conn.commit();
+				System.out.println("**데이터 추가 성공**");
+			}else {
+				//실행 실패 시 rollback
+				conn.rollback();
+				System.out.println("**데이터 추가 실패**");
+			}
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block, 예외발생 시 처리할 구문
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			// 7) 자원 반납 => 생성의 역순으로 반납
+			try {
+				stat.close();
+				conn.close();
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+}

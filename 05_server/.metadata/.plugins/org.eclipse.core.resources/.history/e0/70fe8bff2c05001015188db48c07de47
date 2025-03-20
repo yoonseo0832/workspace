@@ -1,0 +1,27 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>2_scriptElement</title>
+</head>
+<body>
+	<%
+		/*
+			스크립틀릿 : 해당 영역 내에서는 자바 코드 작성 가능
+		*/
+		int sum =0;
+		
+		for(int i =0; i<=100; i++){
+			sum +=i;
+		}
+	%>
+	<p>
+		화면에 출력<br>
+		- 표현식을 사용해 출력 : <%= sum %> <br>
+		- 스크립틀릿을 사용하여 출력 : <% out.println(sum); %>
+	</p>
+	
+</body>
+</html>

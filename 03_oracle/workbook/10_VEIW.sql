@@ -1,0 +1,203 @@
+/*
+    VEIW(뷰)
+        : SELECT문을 통해 얻어진 결과물을 저장해둘 수 있는 객체
+            => 자주 사용되는 쿼리문은 저장해두면 매번 작성할 필요 없음
+        : 임시테이블과 같은 존재 | 실제 데이터를 저장 아닌 논리적으로만 저장됨
+*/
+SELECT EMP_ID, EMP_NAME, DEPT_TITLE, SALARY, NATIONAL_NAME
+FROM EMPLOYEE
+JOIN DEPARTMENT ON DEPT_CODE = DEPT_ID
+JOIN JOB USING(JOB_CODE)
+JOIN LOCATION ON LOCATION_ID = LOCAL_CODE
+JOIN NATIONAL USING(NATIONAL_CODE)
+WHERE NATIONAL_NAME ='한국';
+
+SELECT EMP_ID, EMP_NAME, DEPT_TITLE, SALARY, NATIONAL_NAME
+FROM EMPLOYEE
+JOIN DEPARTMENT ON DEPT_CODE = DEPT_ID
+JOIN JOB USING(JOB_CODE)
+JOIN LOCATION ON LOCATION_ID = LOCAL_CODE
+JOIN NATIONAL USING(NATIONAL_CODE)
+WHERE NATIONAL_NAME ='러시아';
+
+SELECT EMP_ID, EMP_NAME, DEPT_TITLE, SALARY, NATIONAL_NAME
+FROM EMPLOYEE
+JOIN DEPARTMENT ON DEPT_CODE = DEPT_ID
+JOIN JOB USING(JOB_CODE)
+JOIN LOCATION ON LOCATION_ID = LOCAL_CODE
+JOIN NATIONAL USING(NATIONAL_CODE)
+WHERE NATIONAL_NAME ='일본';
+
+GRANT CREATE VIEW TO C##KH;
+-- 선생님 = VW_EMPOLYEE
+CREATE VIEW CODE AS (SELECT EMP_ID, EMP_NAME, DEPT_TITLE, SALARY, NATIONAL_NAME
+FROM EMPLOYEE
+JOIN DEPARTMENT ON DEPT_CODE = DEPT_ID
+JOIN JOB USING(JOB_CODE)
+JOIN LOCATION ON LOCATION_ID = LOCAL_CODE
+JOIN NATIONAL USING(NATIONAL_CODE));
+
+SELECT * FROM CODE WHERE NATIONAL_NAME='한국';
+
+CREATE VIEW VW_EMP AS (SELECT EMP_ID, EMP_NAME, DEPT_TITLE, SALARY, NATIONAL_NAME
+FROM EMPLOYEE
+JOIN DEPARTMENT ON DEPT_CODE = DEPT_ID
+JOIN JOB USING(JOB_CODE)
+JOIN LOCATION ON LOCATION_ID = LOCAL_CODE
+JOIN NATIONAL USING(NATIONAL_CODE));
+
+SELECT * FROM VW_EMP WHERE NATIONAL_NAME ='중국';
+
+-- 뷰 삭제 
+DROP VIEW CODE;
+-- 현재 계정으로 설정ㄷ한  뷰 목록 조회
+SELECT * FROM USER_VIEWS;
+
+CREATE OR REPLACE VIEW VW_EMP 
+AS (SELECT EMP_ID, EMP_NAME, DEPT_TITLE, SALARY, NATIONAL_NAME, BONUS
+FROM EMPLOYEE
+JOIN DEPARTMENT ON DEPT_CODE = DEPT_ID
+JOIN JOB USING(JOB_CODE)
+JOIN LOCATION ON LOCATION_ID = LOCAL_CODE
+JOIN NATIONAL USING(NATIONAL_CODE));
+--------------------------------------------------------------------------------
+-- 오답
+SELECT EMP_ID, EMP_NAME, JOB_NAME, DECODE(SUBSTR(EMP_NO, 8, 1), '1', '남', '2', '여'), TO_CHAR(SYSDATE, 1, 2)-TO_CHAR(HIRE_DATE, 1, 2)
+FROM EMPLOYEE
+JOIN JOB USING(JOB_CODE);
+
+-- 선생님 버전
+SELECT EMP_ID 사번, EMP_NAME 사원명, JOB_NAME 직급명, DECODE(SUBSTR(EMP_NO, 8, 1), 1, '남', 2, '여') 성별, EXTRACT(YEAR FROM SYSDATE) - EXTRACT(YEAR FROM HIRE_DATE) 근무년수
+FROM EMPLOYEE
+JOIN JOB USING(JOB_CODE);
+
+CREATE OR REPLACE VIEW VM_EMP_JOB 
+AS (SELECT EMP_ID 사번, EMP_NAME 사원명, JOB_NAME 직급명, DECODE(SUBSTR(EMP_NO, 8, 1), 1, '남', 2, '여') 성별, EXTRACT(YEAR FROM SYSDATE) - EXTRACT(YEAR FROM HIRE_DATE) 근무년수
+FROM EMPLOYEE
+JOIN JOB USING(JOB_CODE));
+-- 컬럼에 연산식 | 함수식을 사용한 경우 별칭을 부여해야 뷰가 잘 생성된다
+SELECT * FROM VM_EMP_JOB WHERE 직급명='과장';
+
+-- 여자만 정보 조회
+SELECT * FROM VM_EMP_JOB WHERE 성별='여';
+
+-- 20년 이상 근무한 직원 조회
+SELECT  * FROM VM_EMP_JOB WHERE 근무년수 >=20;
+
+-- 뷰 삭제 : DROP VIEW 뷰명;
+-------------------------------------------------------------------------------------
+/*
+    생성된 뷰를 통해서  DML( INSERT | UPDATE | DELETE ) 을 사용해보기
+    -> 뷰를 통해 DML을 작성하게 되면 실제 데이터가 저장되어 있는 테이블에 반영됨
+*/
+-- JOB테이블을 뷰로 생성
+CREATE VIEW VW_JOB AS ( SELECT * FROM JOB ); 
+SELECT * FROM VW_JOB ORDER BY JOB_CODE;  --> 논리적인 테이블
+
+-- VW_JOB 사용해 데이터 추가하기 (DML - INSERT )
+INSERT INTO VW_JOB VALUES ('J8', '인턴');
+
+-- VW_JOB 사용해 데이터 변경하기 (DML - UPDATE )
+UPDATE VW_JOB SET JOB_NAME='알바' WHERE JOB_CODE ='J8';
+
+-- VW_JOB 사용해 데이터 삭제하기 (DML - DELETE )
+DELETE FROM VW_JOB WHERE JOB_CODE ='J8';
+----------------------------------------------------------------------------
+/*
+        DML 명령어로 조작이 불가능한 경우가 많음
+        
+        1) 뷰에 정의되지 않은 컬럼을 조작하려는 경우
+        2) 뷰에 정의되어 있지 않고 테이블에 NOT NULL 제약조건이 설정되어 있는 경우
+        3) 산술연산식 또는 함수식으로 정의된 경우
+        4) DISTINCT 구문이 포함된 경우
+        5) JOIN을 이용하여 여러 테이블은 연결한 경우
+        
+        => 뷰는 
+*/
+------------------------------------------------------------------------------
+/*
+    VIEW 생성 옵션
+    CREATE [FORCE | NOFORCE ] VIEW 뷰명 
+    AS 서브쿼리
+    [WITH CHECK OPTION]
+    [WITH READ ONLY]
+    - 기존의 동일한 이름의 뷰 있는 경우 뷰를 갱신하고 없는 경우 뷰를 새로 생성
+    CREATE OR REPLACE VIEW 뷰명
+    AS 서브쿼리
+    - FORCE | NOFORCE 
+        : 기본값은 NOFORCE 서브쿼리에 작성한 테이블이 존재하는 경우에만 뷰를 생성(DEFAULT )
+        : FORCE  서브쿼리에 작성한 테이블이 존재하지 않아도 강제로 뷰를 생성, 사용하려면 어차피 테이블 생성해야함 
+        
+    - WITH CHECK OPTION : DML 사용 시 서브쿼리에 작성한 조건에 맞는 값으로만 실행되도록 하는 옵션임
+    - WITH READ ONLY : 뷰를 조회만 가능하도록 하는 옵션
+*/
+CREATE VIEW VW_TEMP
+AS SELECT TCODE, TNAME, TCONTENT FROM TT;
+--테이블 또는 뷰가 존재하지 않습니다
+CREATE FORCE VIEW VW_TEMP
+AS SELECT TCODE, TNAME, TCONTENT FROM TT;
+SELECT * FROM VW_TEMP;
+--non-existent procedures, 생성은 됬지만 존재하지 않아서 조회 불가능
+CREATE TABLE TT(
+    TCODE NUMBER,
+    TNAME VARCHAR2(20),
+    TCONTENT VARCHAR2(100)
+);
+--> 테이블 생성 후 잘 동작함
+
+-- WITH CHECK OPTION 
+--옵션없이 급여기 300이상인 사원들 정보로 뷰 생성
+CREATE VIEW VW_EMP01
+AS (SELECT * FROM EMPLOYEE WHERE SALARY >=3000000);
+
+SELECT * FROM VW_EMP01;
+-- 204사원 급여 200만원으로 변경
+
+UPDATE VW_EMP01 SET SALARY = 2000000 WHERE EMP_ID=204;
+
+ROLLBACK;
+CREATE OR REPLACE VIEW VW_EMP01
+AS (SELECT * FROM EMPLOYEE WHERE SALARY >=3000000)
+WITH CHECK OPTION;
+
+UPDATE VW_EMP01
+    SET SALARY = 2000000 WHERE EMP_ID=204;
+-- 뷰의 WITH CHECK OPTION의 조건에 위배 됩니다
+UPDATE VW_EMP01
+    SET SALARY = 4000000 WHERE EMP_ID=204;
+-- WITH CHECK OPTION 보다 높은 금액이라서 위배되지 않고 업데이트 잘 됨, 부합해서 변경 가능
+
+-- WITH READ ONLY
+CREATE OR REPLACE VIEW VW_EMP01
+AS SELECT * FROM EMPLOYEE WHERE SALARY >=3000000
+WITH READ ONLY;
+
+SELECT * FROM VW_EMP01;
+
+DELETE FROM VW_EMP01 WHERE EMP_ID =204;
+-- 읽기 전용 뷰에서는 DML 작업을 수행할 수 없습니다. READ ONLY OPTION에 의해 DML 사용 불가능 (오류 발생!)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

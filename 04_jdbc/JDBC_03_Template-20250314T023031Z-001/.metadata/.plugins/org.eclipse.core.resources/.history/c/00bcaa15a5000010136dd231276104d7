@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<comment>Properties Test</comment>
+
+	<entry key="selectAll">
+		SELECT *
+		FROM MEMBER
+		ORDER BY MEMBERID
+	</entry>
+	<entry key="selectById">
+		SELECT * FROM MEMBER WHERE MEMBERID LIKE '%'||?||'%'
+	</entry>
+	<entry key="deleteMember">
+		DELETE FROM MEMBER WHERER MEMBERID =?
+	</entry>
+	<entry key="updateMember">
+		UPDATE MEMBER 
+			SET MEMBERPW =?, GENDER = ?, ADDRESS = ?, HOBBY = ?
+		 WHERE MEMBERID =?
+	</entry>
+	<entry key="insertMember">
+		INSERT INTO MEMBER values 
+		(SEQ_MNO.NEXTVAL
+					, ?
+					, ?
+					, ?
+					, ?
+					, ?
+					, ?
+					, ?
+					, ?
+					, SYSDATE)
+	</entry>
+</properties>

@@ -1,0 +1,50 @@
+package controller;
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class ELServlet
+ */
+@WebServlet("/el.do")
+public class ELServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public ELServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		/*
+		 * JSP 내장 객체 종류
+		 * => 데이터를 담을 수 있는 공간
+		 * 
+		 * 1)  ServletContext (application scope)
+		 * 		: 한 어플리케이션 당 1개 존재하는 객체
+		 * 		해당 영역에 데이터를 담을 경우 어플리케이션 전역에서 사용 가능
+		 * 2) HttpSession (session scope)
+		 * 		: 한 브라우저 당 1개 존재하는 객체
+		 */
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}

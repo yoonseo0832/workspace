@@ -1,0 +1,19 @@
+package com.kh.controller;
+
+import java.util.ArrayList;
+
+import com.kh.model.service.GameService;
+import com.kh.model.vo.Game;
+
+public class GameController {
+	private GameService gs = new GameService();
+	
+	public GameController() {}
+
+	public void selectAll() {
+		ArrayList<Game> gList = gs.selectAll(); 
+		
+		if(gList.isEmpty()) System.out.println("게임이 없습니다.");
+	}
+
+}

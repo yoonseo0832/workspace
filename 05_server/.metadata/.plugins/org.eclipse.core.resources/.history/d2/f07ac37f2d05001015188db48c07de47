@@ -1,0 +1,32 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>2_scriptElement</title>
+</head>
+<body>
+	<%
+		/*
+			스크립틀릿 : 해당 영역 내에서는 자바 코드 작성 가능
+		*/
+		int sum =0;
+		
+		for(int i =0; i<=100; i++){
+			sum +=i;
+		}
+	%>
+	<p>
+		화면에 출력<br>
+		- 표현식을 사용해 출력 : <%= sum %> <br>
+		- 스크립틀릿을 사용하여 출력 : <% out.println(sum); %>
+		<%-- out: JSP 내장 객체(PrintWriter 타입) --%>
+	</p>
+	<%
+		String[] sArr = {"딸기", "사과", "오렌지", "수박"};
+	%>
+	<h5>배열 길기: <%= sArr.length %></h5>
+	<h5>배열 담긴 값: <%= String.join("/ ", sArr) %></h5>
+</body>
+</html>

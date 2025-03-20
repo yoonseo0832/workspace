@@ -1,0 +1,66 @@
+package controller;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class OrderedPizzaServlet
+ */
+@WebServlet("/orderpizza")
+public class OrderedPizzaServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public OrderedPizzaServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		
+		request.setCharacterEncoding("UTF-8");
+		
+		PrintWriter pw = response.getWriter();
+		
+		String pizza = request.getParameter("pizza");
+		String[] toppings = request.getParameterValues("topping");
+		String[] sides = request.getParameterValues("side");
+		
+		pw.println("피자는 "+ pizza+ ", 포핑은 "+toppings + ", 사이드는 "+ sides+ " 주문하셨습니다.");
+		int price = 0;
+		switch(pizza) {
+		case "치즈피자":
+			price +=5000;
+		case "콤비네이션피자":
+			price +=6000;
+		case "포테이포피자":
+			price +=7000;
+		case "고구마피자":
+			price +=7000;
+		case "불고기피자":
+			price +=8000;
+		}
+		
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}

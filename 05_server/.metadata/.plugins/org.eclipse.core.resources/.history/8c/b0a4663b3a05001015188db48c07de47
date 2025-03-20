@@ -1,0 +1,12 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>EL 기본 문법</title>
+</head>
+<body>
+	<h3>기존 방식(스크립틀릿, 표현식)으로 각 영역의 scope의 데이터를 화면에 출력</h3>
+</body>
+</html>

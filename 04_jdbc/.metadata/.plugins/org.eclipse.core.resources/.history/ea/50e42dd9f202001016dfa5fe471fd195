@@ -1,0 +1,37 @@
+package com.kh.model.service;
+
+import java.sql.Connection;
+import java.util.ArrayList;
+
+import com.kh.common.JDBCTemplate;
+import com.kh.model.dao.GameDAO;
+import com.kh.model.vo.Game;
+
+public class GameService {
+	private Connection conn = null;
+
+	public GameService() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public ArrayList<Game> selectAll() {
+		conn = JDBCTemplate.getConnection();
+		
+		ArrayList<Game> list = new GameDAO().selectAllGame(conn);
+		
+		JDBCTemplate.close(conn);
+		
+		return list;
+	}
+
+	public void addGame(Game game) {
+		conn = JDBCTemplate.getConnection();
+		int r = new GameDAO().addGame(conn, game);
+		
+		if(r > 0) JDBCTemplate.commit(conn);
+		else JDBCTemplate.rollback(conn);
+		
+		JDBCTemplate.close(conn);
+	}
+
+}

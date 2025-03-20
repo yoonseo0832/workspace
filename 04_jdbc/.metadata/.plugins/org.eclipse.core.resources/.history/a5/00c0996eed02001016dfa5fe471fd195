@@ -1,0 +1,14 @@
+package com.kh.controller;
+
+import com.kh.model.service.GameService;
+
+public class GameController {
+	private GameService gs = new GameService();
+	
+	public GameController() {}
+
+	public void selectAll() {
+		ArrayList<Game> gList = gs.selectAll(); 
+	}
+
+}

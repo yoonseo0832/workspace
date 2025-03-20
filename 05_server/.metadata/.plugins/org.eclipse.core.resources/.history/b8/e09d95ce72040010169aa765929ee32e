@@ -1,0 +1,83 @@
+package controller;
+
+import java.io.IOException;
+import java.util.Arrays;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class RequestGetServlet
+ */
+@WebServlet(asyncSupported = true, urlPatterns = { "/test.do" })
+public class RequestGetServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public RequestGetServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// System.out.println("@@@@@@ Get 요청이 들어옴 @@@@@@");
+		/*
+		 * 첫번째 매개변수 (HttpServletRequest) 에는 요청 시 전달된 내용들이 담겨져 있음 -> 사용자가 입력한 값, 요청방식,
+		 * 요청자의 IP주소 등 두번째 매개변수 (HttpServletResponse) 에는 요청에 대한 처리 후 응답할 때 사용할 객체
+		 * 
+		 * ----------------------------------------------------------------------- - 요청시
+		 * 전달된 데이터 추출 (request 객체의 parameter 영역 안에 데이터기 담겨있음)
+		 * requset.getParameter("키값"):String => 키값에 해당하는 데이터를 반환
+		 */
+		// response.getWriter().append("Served at: ").append(request.getContextPath());
+		// number 타입과 text 타입은 값이 없으면 빈값으로 나오고, radio, gender 타입은 값이 없으면 null로 나옴,
+		// address, range는 선택된 값이 무조건 나옴
+		String userName = request.getParameter("userName"); // 이름: userName
+		String gender = request.getParameter("gender");
+		String age = request.getParameter("age");
+		String address = request.getParameter("address");
+		String height = request.getParameter("height");
+
+		double h = Double.parseDouble(height);
+		System.out.println("키--> " + h);
+		// 예외처리로
+		if (!age.isEmpty()) {
+			int ageNum = Integer.parseInt(age);
+			System.out.println("나이--> " + ageNum);
+		}
+		// 같은 키값으로 전달된 데이터를 추출
+		//request.getParameterValues("키값"):String[], 값이 없다면 null로 나옴
+		String[] foods = request.getParameterValues("food");
+		if(foods == null) {
+			System.out.println("좋아하는 음식이 없네요");
+		}else {
+			System.out.println("좋아하는 음식: "+ String.join(", ", foods));
+		}
+		// For input string: "" HTTP 상태 500 – 내부 서버 오류
+		System.out.println("이름: " + userName + ", 성별: " + gender + ", 나이: " + age + ", 주소: " + address + ", 키: "
+				+ height);
+		//System.out.println(Arrays.toString(foods)); // Arrays.toString() 해야 주소값이 아닌 value값 나옴
+		
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}

@@ -1,0 +1,11 @@
+package com.kh.controller;
+
+public class GameController {
+
+	public GameController() {}
+
+	public void selectAll() {
+		
+	}
+
+}

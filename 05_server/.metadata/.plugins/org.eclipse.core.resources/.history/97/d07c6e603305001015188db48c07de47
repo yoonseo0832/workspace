@@ -1,0 +1,16 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JSP - include 지시어</title>
+</head>
+<body>
+    <h1>include 지시어</h1>
+
+    <div style="border:3px solid red;">
+        <%@ include file="2_scriptElement"%>
+    </div>
+</body>
+</html>
