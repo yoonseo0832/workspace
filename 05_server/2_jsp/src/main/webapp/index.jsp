@@ -44,6 +44,11 @@
     <p>
     	jsp 페이지에서 바로 사용 가능 => 모든 태그명 앞에 <b>jsp:</b> 접두어를 붙여서 사용
     </p>
+    <h3>JSTL?</h3>
+    <p>
+    	jsp에서 사용되는 커스텀 액션 태그<br>
+    	공통적으로 사용되는 코드들을 합하여 보가 쉽게 사용할 수 있도록 태그화하여 표준으로 제공하는 라이브러리
+    </p>
     <a href="views/3_StandardAction/1_include.jsp">[1] jsp:include</a>
     <a href="views/3_StandardAction/2_forward.jsp">[2] jsp:forward</a>
     <a href="views/4_CustomAction/1_jstl.jsp">JSTL 문법</a>

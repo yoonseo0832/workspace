@@ -24,5 +24,10 @@
 	<p>숫자, 날짜 및 시간 데이터의 출력 형식을 지정할 때 사용</p>
 	
 	<a href="3_fmt.jsp">Format Library</a>
+	
+	<h4>* JSTL Function Library</h4>
+	<p>EL 내에서 사용할 수 있는 메서드를 제공</p>
+	
+	<a href="4_function.jsp">Function Library</a>
 </body>
 </html>

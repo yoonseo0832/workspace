@@ -38,11 +38,40 @@
 	<p>
 		날짜 및 시간 데이터의 포맷(형식) 지정하여 출력
 	</p>
-	<i>단, java.util.Date 객체 사용</i>
-	
-	
-	
-	
+	<i>단, java.util.Date 객체 사용</i><br>
+	<%--import 하지 않고 앞에 경로를 붙이면 사용 가능 --%>
+	<c:set var="now" value="<%= new java.util.Date() %>" />
+	- now : ${now }
+	<br>
+	<ul>
+	<%--date : 날짜 | time : 시간 --%>
+		<li>날짜: <fmt:formatDate value="${now }" type="date" /></li>
+		<li>시간: <fmt:formatDate value="${now }" type="time" /></li>
+		<li>
+			- 날짜+시간: <fmt:formatDate value="${now }" type="both" />
+			<ul>
+				<li>
+					medium : <fmt:formatDate value="${now }" type="both" dataStyle="medium" timeStyle="medium" />
+				</li>
+				<li>
+				<%--더 자세한 형식 --%>
+					long : <fmt:formatDate value="${now }" type="both" dataStyle="long" timeStyle="long" />
+				</li>
+				<li>
+				<%--더 짧은 형식 --%>
+					short : <fmt:formatDate value="${now }" type="both" dataStyle="short" timeStyle="short" />
+				</li>
+				<li>
+				<%--더 짧은 형식 --%>
+					full : <fmt:formatDate value="${now }" type="both" dataStyle="full" timeStyle="full" />
+				</li>
+				<li>
+				<%--더 짧은 형식 --%>
+					pattern : <fmt:formatDate value="${now }" type="both" pattern="yyyy-MM-dd(E) HH:mm:ss" />
+				</li>
+			</ul>
+		</li>
+	</ul>
 	
 </body>
 </html>

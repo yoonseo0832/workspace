@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key="selectDepartmentList">
+		SELECT EMP_NAME,DEPT_ID, DEPT_TITLE, LOCATION_ID, NATIONAL_NAME 
+		FROM DEPARTMENT
+		JOIN EMPLOYEE ON  DEPT_ID = DEPT_CODE 
+		JOIN LOCATION ON LOCATION_ID = LOCAL_CODE
+		JOIN NATIONAL USING (NATIONAL_CODE) 
+		ORDER BY NATIONAL_NAME DESC
+	</entry>
+</properties>

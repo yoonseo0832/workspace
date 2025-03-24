@@ -53,7 +53,7 @@ public class PracticeJstlServlet extends HttpServlet {
 
 		
 		// TODO: practice_jstl.jsp 페이지로 포워딩
-		request.getRequestDispatcher("views/practice_jstl.jsp").forward(request, response);;
+		request.getRequestDispatcher("views/practice_jstl.jsp").forward(request, response);
 	}
 
 	/**
