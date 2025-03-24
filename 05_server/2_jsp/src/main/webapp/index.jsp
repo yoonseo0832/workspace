@@ -33,5 +33,26 @@
     <a href="/2_jsp/el.do">[1] EL 기본 문법</a>
     <!-- <a href="el.do"></a> 상대경로 가능 -->
     <a href="operator.do">[2] EL 연산자</a>
+    
+    <hr>
+    
+    <h2>* Action Tag</h2>
+    <p>
+    	jsp 페이지에서 어떤 동작을 수행하고자 할때 사용하는 문법
+    </p>
+    <h3>표준 액션 태그(Standard Action Tag)</h3>
+    <p>
+    	jsp 페이지에서 바로 사용 가능 => 모든 태그명 앞에 <b>jsp:</b> 접두어를 붙여서 사용
+    </p>
+    <a href="views/3_StandardAction/1_include.jsp">[1] jsp:include</a>
+    <a href="views/3_StandardAction/2_forward.jsp">[2] jsp:forward</a>
+    <a href="views/4_CustomAction/1_jstl.jsp">JSTL 문법</a>
+    
+    
+    
+    
+    
+    
+    
 </body>
 </html>

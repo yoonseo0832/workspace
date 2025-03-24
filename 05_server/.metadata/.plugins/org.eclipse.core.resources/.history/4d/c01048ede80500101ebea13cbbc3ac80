@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+</head>
+<body>
+	<form action="/practice/wrongUrl" method="get">
+		<button type="submit" id="btn_go">GO</button>
+	</form>
+</body>
+</html>

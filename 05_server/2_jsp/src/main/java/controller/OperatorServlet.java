@@ -37,8 +37,9 @@ public class OperatorServlet extends HttpServlet {
 		request.setAttribute("s2", "");
 		request.setAttribute("s3", "안녕하세용!");
 		request.setAttribute("s4", "");
-		request.setAttribute("student", new Student("신지수", 24, "여자"));
+		request.setAttribute("student1", new Student("신지수", 24, "여자"));
 		
+		request.setAttribute("student2", null);
 		ArrayList<String> list1 = new ArrayList<>();
 		request.setAttribute("list1", list1);
 		
@@ -46,6 +47,9 @@ public class OperatorServlet extends HttpServlet {
 		list2.add("빵빵이");
 		list2.add("옥지");
 		request.setAttribute("list2", list2);
+		
+		// 2__elOperator.jsp 페이지로 응답하기(포워딩)
+		request.getRequestDispatcher("/views/2_EL/2_elOperator.jsp").forward(request, response);
 	}
 
 	/**

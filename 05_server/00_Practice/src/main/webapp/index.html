@@ -2,13 +2,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>연습용 페이지</title>
+<link rel="icon" type="image/x-icon" href="https://img.icons8.com/?size=100&id=V6zmBDTUPL-g&format=png&color=000000">
+
 <style>
 	header { width: 100%; padding: 3%; background-color: #1990ff; color: #fff; font-size: large; }
 
 	nav ul { list-style-type: none; }
-	nav ul li { float: left; padding:2px; }
-	nav ul li:hover { background-color: #1990ff; color:#fff; border: 1px solid #fff; }
+	nav ul li { float: left; padding:2px; border: 1px dashed #1990ff; padding: 2%; margin:1%; }
+	nav ul li:hover { background-color: #1990ff; border: 1px solid #fff; cursor: pointer; }
+	nav ul li:hover, nav ul li:hover a { color: #fff; }
 	nav ul li a { text-decoration: none; cursor: pointer; }
 </style>
 </head>
@@ -24,6 +27,11 @@
 			<li><a href="views/practice1_random.html">연습1 랜덤 상대경로</a></li>
 			<br>
 			<li><a href="views/pizzaOrder.jsp">연습2 피자 주문</a></li>
+			<br>
+			<li><a href="wrongUrl">연습3 잘못된 접근</a></li>
+			
+			<!-- TODO: JSTL 연습 페이지로 이동 -->
+			<li><a href="practice.jstl>JSTL 연습</a></li>
 		</ul>
 	</nav>
 </body>

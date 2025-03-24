@@ -1,0 +1,41 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Standard Action Tag - forward</title>
+</head>
+<body>
+	<h3>jsp:forward</h3>
+	<p>
+		현재 페이지에 접근 시 다른 페이지로 이동(포워딩)
+	</p>
+	<jsp:forward page="footer.jsp" />
+	<%-- 요청된 url은 유지되고 페이지만 이동시킴 --%>
+	
+	<br><br>
+	
+	<h3>* 커스텀 액션 태그(Custom Action Tag)</h3>
+	<p>
+		jsp 페이지에서 바로 사용 불가능(별도의 라이브러리 필요)
+		=> 가장 대표적인 라이브러리 : jstl
+	</p>
+	<h4>JSTL?</h4>
+	<p>
+		jsp에서 사용되는 커스텀 액션 태그<br>
+		공통적으로 사용되는 코드들을 합하여 보다 쉽게 사용할 수 있도록
+		태그화하여 표준으로 제공하는 라이브러리
+	</p>
+	<h4>라이브러시 추가</h4>
+	<ol>
+		<li><a href="https://tomcat.apache.org/">톰캣 사이트 접속</a></li>
+		<li>
+			메뉴에서 taglibs 메뉴를 찾아 접속(다운로드 카테고리에 있음)
+		</li>
+		<li>4개의 라이브러리 파일을 다운로드 받음(파일은 .jar/ jar files)</li>
+		<li>webapp > WEB-INF > lib > 다운로드 받은 파일 4개를 추가하면 됨(복사됨)</li>
+	</ol>
+	<a href="views/4_CustomAction/1_jstl.jsp">JSTL 문법</a>
+</body>
+</html>

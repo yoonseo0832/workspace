@@ -1,0 +1,19 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Standard Action Tag</title>
+</head>
+<body>
+	<h2>jsp:include</h2>
+	<p>
+		또 다른 페이지를 포함하고자 할때 쓰는 태그
+	</p>
+	<!-- 지시어 사용법 -->
+	<%@  include file="footer.jsp" %><br>
+	year 변수로 접근(사용) : <%= year %><br>
+	포함된 페이지의 변수로 접근 가능!
+</body>
+</html>

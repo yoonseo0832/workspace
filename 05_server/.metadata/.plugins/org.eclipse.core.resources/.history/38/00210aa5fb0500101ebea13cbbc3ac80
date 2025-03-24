@@ -1,0 +1,18 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Custom Action Tag - JSTL</title>
+</head>
+<body>
+	<h3>* JSTL 선언방법</h3>
+	<p>
+		JSTL을 사용하기 위해서 해당 jsp 페이지 상단 <br>
+		taglib 지시어를 사용하여 선언<br><br>
+		
+		&lt;%@ taglib prefix="접두어" url="라이브러리 파일상의  url주소" %&gt; 
+	</p>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>EL 연산자</title>
+</head>
+<body>
+	<h1>EL 연산자</h1>
+	
+	<h3>* 산술 연산</h3>
+	- 기존 : 10000 + 10 = 
+	<!-- 형변환해야 함 정수타입으로 int, 서블릿에 만들어놓은 변수를 가지고 올때 request.getAttribute()  -->
+	<%= (int)request.getAttribute("big") + (int)request.getAttribute("small") %>
+	<br>
+	- EL 방식: <br>
+	10000 + 10 = ${big + small}<br>
+	10000 - 10 = ${big - small}<br>
+	10000 * 10 = ${big * small}<br>
+	<!-- 연산 기호가 아닌 연산자도 있음 -->
+	10000 / 10 = ${big / small} 또는 ${big div small }<br>
+	10000 % 10 = ${big % small} 또는 ${big mod small }<br>
+	
+	<h3>* 대소비교 연산자</h3>
+	10000 &gt; 10 = ${big > small} 또는 ${big gt small } <!-- 결과: true --><br>
+	10000 &lt; 10 = ${big < small} 또는 ${big lt small }	<!-- 결과: false --><br>
+	10000 &gt;= 10 = ${big >= small} 또는 ${big ge small }	<!-- 결과: true --><br>
+	10000 &lt;= 10 = ${big <= small} 또는 ${big le small }	<!-- 결과: false -->
+	
+	<h3>* 동등비교 연산자</h3>
+	- s1과 s2의 값이 일치하는 가? ${s1 == s2 }<br>
+	- s2과 s4의 값이 일치하는 가? ${s2 == s4 } 또는 ${s2 eq s4 }<br>
+	- s2과 s3의 값이 일치하지 않는다? ${s2 != s4 } 또는 ${s2 ne s4 }
+	<%-- EL에서는 문자열에 대한 동등비교가 자바에서의 equals와 같이 동작함 --%>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
