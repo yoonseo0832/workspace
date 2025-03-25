@@ -4,9 +4,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Mybatis Project</title>
 </head>
 <body>
-
+	<%-- common/menubar.jsp 페이지를 포함 --%>
+	<jsp:include page="common/menubar.jsp" />
+	
 </body>
 </html>
