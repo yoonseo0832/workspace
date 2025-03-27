@@ -19,8 +19,9 @@
    				,USER_PWD
    				,USER_NAME
    				,EMAIL
-   				,BIRTHDAY
    				,GENDER
+   				,BIRTHDAY
+   				
    				,PHONE
    				,ADDRESS)
    	 		VALUES(SEQ_UNO.NEXTVAL
@@ -28,9 +29,58 @@
    					, #{userPwd}
    					, #{userName}
    					, #{email}
-   					, #{birthday}
    					, #{gender}
+   					, #{birthday}
+   					
    					, #{phone}
    					, #{address})
    </insert>
+   <!-- resultMap : mybatis 핵심 기능 중 하나 ResulySet으로부터 조회된 컬럼값을 하나씩 뽑아
+						지정한 vo/dto 객체의 각 필드에 저장
+						코드를 줄여주는 역할
+	<resultMap id="식별자" type="조회결과를 담아 반환하고자 하는 객체의 타입">
+			<result column="조회된컬럼명" property="객체의필드명" />
+			<result column="조회된컬럼명" property="객체의필드명" />
+			...
+	 </resultMap>
+	 => 컬럼명: 대소문자 구분 X , 필드명: 대소문자 구분 O(오타방지를 위해 필드명 복붙)
+	 
+	 alias="Member" 별칭 등록된 경우 type="Member" 
+	 => 별칭 등록 안하면 type="com.kh.mybatis.member.model.vo.Member"  전체 클래스명
+	 -->
+	 <resultMap id="memberResultMap" type="Member">
+	 		<result column="USER_ID" property="userId" />
+	 		<result column="USER_PWD" property="userPwd" />
+	 		<result column="USER_NAME" property="userName" />
+	 		<result column="EMAIL" property="email" />
+	 		<result column="GENDER" property="gender" />
+	 		<result column="BIRTHDAY" property="birthday" />
+	 		<result column="PHONE" property="phone" />
+	 		<result column="ADDRESS" property="address" />
+     </resultMap>
+     <!-- 
+     	DQL : (select)
+     	<select id=" 식별자(별칭)"
+     			 resultMap="조회된 결과를 맵핑할 resultMap의 id속성"
+     			 또는 resultType="조회된 결과를 반환하고자 하는 타입"
+     			 [parameterType="전달받을 데이터 타입(전체클래스명| 별칭)"] >
+     			 
+     		실행할 SQL문
+     		
+     	</select>
+      -->
+   <select id="selectMember" resultMap="memberResultMap" parameterType="Member">
+   		SELECT USER_ID
+   				, USER_PWD
+   				, USER_NAME
+   				, EMAIL
+   				, GENDER
+   				, TO_CHAR(TO_DATE(BIRTHDAY, 'rrmmdd'),'yyyy-mm-dd') birthday
+   				, PHONE
+   				, ADDRESS
+		 	FROM MEMBER
+			WHERE USER_ID= #{userId} 
+				  AND USER_PWD= #{userPwd} 
+				  AND STATUS='Y'
+   </select>
 </mapper>

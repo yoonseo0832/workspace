@@ -58,6 +58,8 @@ public class MemberInsertController extends HttpServlet {
 		// 결과에 따라 페이지 구분
 		if(result > 0) {// 회원가입 성공 -> 메인페이지 url 재요청 
 			//response.sendRedirect("/mybatis");
+			
+			request.getSession().setAttribute("alertMsg", "회원가입에 성공했습니다.");
 			response.sendRedirect(request.getContextPath());
 		}else {// 회원가입 실패 -> 에러페이지로 포워딩
 			//request영역에 에러메세지 저장

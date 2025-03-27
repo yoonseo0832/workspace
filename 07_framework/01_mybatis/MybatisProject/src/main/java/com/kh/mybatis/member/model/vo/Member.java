@@ -20,6 +20,16 @@ public class Member {
 	public Member() {
 		super();
 	}
+	
+	public Member(String userId, String email, String gender, String phone, String address) {
+		super();
+		this.userId = userId;
+		this.email = email;
+		this.gender = gender;
+		this.phone = phone;
+		this.address = address;
+	}
+
 	// 회원가입 시 추가한 생성자
 	public Member(String userId, String userPwd, String userName, String email, String birthday, String gender,
 			String phone, String address) {
@@ -28,7 +38,7 @@ public class Member {
 		this.userPwd = userPwd;
 		this.userName = userName;
 		this.email = email;
-		this.birthday = birthday;
+		this.birthday = birthday; // yymmdd
 		this.gender = gender;
 		this.phone = phone;
 		this.address = address;
