@@ -29,6 +29,12 @@ public class Member {
 		this.phone = phone;
 		this.address = address;
 	}
+	
+	public Member(String userId, String userPwd) {
+		super();
+		this.userId = userId;
+		this.userPwd = userPwd;
+	}
 
 	// 회원가입 시 추가한 생성자
 	public Member(String userId, String userPwd, String userName, String email, String birthday, String gender,

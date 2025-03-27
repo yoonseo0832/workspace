@@ -1,6 +1,7 @@
 package com.kh.mybatis.member.model.dao;
 
 import java.sql.ResultSet;
+import java.util.HashMap;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -19,5 +20,14 @@ public class MemberDao {
 		// 데이터 조회 시 결과가 없을 경우 null을 반환
 		return sqlSession.selectOne("memberMapper.selectMember", m);
 	}
-
+	public int updateMember(SqlSession sqlSession, Member m) {
+		return sqlSession.update("memberMapper.updateMember", m);
+	}
+	public int deleteMember(SqlSession sqlSession, Member m) {
+		return sqlSession.update("memberMapper.deleteMember", m);
+	}
+	
+	public int updatePassword(SqlSession sqlSession, HashMap data) {
+		return sqlSession.update("memberMapper.updatePassword", data);
+	}
 }

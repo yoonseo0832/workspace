@@ -35,6 +35,28 @@
    					, #{phone}
    					, #{address})
    </insert>
+   <update id="updateMember">
+   		UPDATE MEMBER
+   		   SET EMAIL = #{email}
+   		     , GENDER = #{gender}
+   		     , PHONE = #{phone}
+   		     , ADDRESS = #{address}
+   		     , MODIFY_DATE = SYSDATE
+   		 WHERE USER_ID = #{userId}
+   		 	   AND STATUS = 'Y'
+   </update>
+   <update id="deleteMember">
+   	UPDATE MEMBER
+   		SET STATUS = 'N'
+   			, MODIFY_DATE = SYSDATE
+   		WHERE USER_ID = #{userId} AND USER_PWD = #{userPwd}
+   </update>
+   <update id="updatePassword">
+   	UPDATE MEMBER
+   		SET USER_PWD = #{newPwd}
+   			, MODIFY_DATE = SYSDATE
+   		WHERE USER_ID =#{id} AND USER_PWD = #{passwd}
+   </update>
    <!-- resultMap : mybatis 핵심 기능 중 하나 ResulySet으로부터 조회된 컬럼값을 하나씩 뽑아
 						지정한 vo/dto 객체의 각 필드에 저장
 						코드를 줄여주는 역할

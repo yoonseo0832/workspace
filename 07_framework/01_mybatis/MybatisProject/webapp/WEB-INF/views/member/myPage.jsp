@@ -97,12 +97,93 @@
 			<br>
 			<div align="center">
 				<button type="submit" class="btn btn-sm btn-primary">정보 수정</button>
-				<button type="button" class="btn btn-sm btn-secondary">비밀번호 수정</button>
-				<button type="button" class="btn btn-sm btn-danger">회원 탈퇴</button>
+				<button type="button" class="btn btn-sm btn-secondary"
+						data-bs-toggle="modal" data-bs-target="#updatePwdModal">비밀번호 수정</button>
+				<button type="button" class="btn btn-sm btn-danger"
+						data-bs-toggle="modal" data-bs-target="#deleteMemModal">회원 탈퇴</button>
 			</div>
 		</form>
 	</div>
+	<!-- 회원 비번 변경 모달 -->
+	<div class="modal fade" id="updatePwdModal">
+	  <div class="modal-dialog modal-dialog-centered">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h1 class="modal-title fs-5" id="updatePwdMemModal">회원 비밀번호 변경</h1>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      </div>
+	      <div class="modal-body">
+	        <form action="updatePwd.me" method="post">
+	        <input type="hidden" name="userId" value="${loginUser.userId }" />
+				<div class="mb-3">
+					<label for="password" class="col-form-label">현재 비밀번호 : </label>
+					<input type="password" class="form-control" id="password" name="userPwd" required/>
+				</div>
+				<div class="mb-3">
+					<label for="newPwd" class="col-form-label">변경할 비밀번호 : </label>
+					<input type="password" class="form-control" id="newPwd" name="newPwd" required/>
+				</div>
+				<div class="mb-3">
+					<label for="newPwdCheck" class="col-form-label">변경할 비밀번호 확인: </label>
+					<input type="password" class="form-control" id="newPwdCheck"  required/>
+				</div>
+				<button type="submit" class="btn btn-sm btn-secondary float-end" onclick="return pwdCheck();">변경하기</button>
+	        </form>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	<!-- 회원 탈퇴 모달 -->
+	<div class="modal fade" id="deleteMemModal" tabindex="-1" aria-labelledby="deleteMemModalLabel" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-centered">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	      
+	        <h1 class="modal-title fs-5" id="deleteMemModalLabel">회원 탈퇴</h1>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	        
+	      </div>
+	      <div class="modal-body">
+	        <form action="delete.me" method="post">
+				<%-- 회원ID : 입력받지 x --%>
+				<input type="hidden" name="userId" value="${ loginUser.userId }" />
+				<b>
+					탈퇴 후 복구가 불가능합니다. <br>
+					그래도 탈퇴하시겠습니까?
+				</b>
+
+				<%-- 회원PWD : 입력받기 --%>
+				<div class="mb-3">
+					<label for="password" class="col-form-label">비밀번호 : </label>
+					<input type="password" class="form-control" id="password" name="userPwd" required />
+				</div>
+				
+				<button type="submit" class="btn btn-sm btn-danger float-end">탈퇴하기</button>
+	        </form>
+	      </div>
+	    </div>
+	  </div>
+	</div>
 	<script>
+	function pwdCheck(){
+		const pw = document.querySelector("#updatePwdModal #newPwd").value;
+		const pwCheck = document.querySelector("#updatePwdModal #newPwdCheck").value;
+		
+		// 입력값이 모두 입력되지 않았을 때 변경 요청하지 않도록 처리
+		/*
+		const userPwd = document.querySelector("#updatePwdModal #password").value;
+		if(userPwd == "" || newPwd == "" || newPwdCheck == ""){
+			alert("입력되지 않은 값이 있습니다. 확인해주세요.");
+			return false;
+		}
+		*/
+		if(pw != pwCheck){
+			alert("새로 작성하신 비밀번호가 서로 다릅니다.");
+			return false;
+		}
+		return true;
+	}
+	
 	// 모든 요소들이 로드 되었을때 화면에 표시
 	onload = function (){
 		// 성별항목을 적용

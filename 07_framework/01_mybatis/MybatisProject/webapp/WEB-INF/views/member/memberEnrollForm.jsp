@@ -17,6 +17,12 @@
 	integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
 	crossorigin="anonymous"></script>
 <!--부트스트랩 CDN-->
+<!--  jQuery CDN -->
+<script
+  src="https://code.jquery.com/jquery-3.7.1.min.js"
+  integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+  crossorigin="anonymous"></script>
+<!--  jQuery CDN -->
 <style>
 /* 공통적인 부분에 대한 css */
 .outer {
@@ -52,7 +58,7 @@
 					<td><input type="text" class="form-control" name="userId"
 						maxlength="30" required /></td>
 					<td><input type="button" class="btn btn-sm btn-outline-dark"
-						value="중복체크" id="btn-marign" /></td>
+						value="중복체크" id="btn-marign" onclick="idCheck();"/></td>
 				</tr>
 				<tr>
 					<td>* 비밀번호</td>
@@ -62,7 +68,7 @@
 				<tr>
 					<td>* 비밀번호 확인</td>
 					<td>
-						<input type="password" class="form-control" name="userPwdCheck" required />
+						<input type="password" class="form-control" id="userPwdCheck" required />
 					</td>
 				</tr>
 				<tr>
@@ -118,7 +124,52 @@
 		</form>
 	</div>
 	<script>
-		
+		// 아이디 중복 체크 (비동기통신, ajax)
+		function idCheck(){
+			//[중복체크] 클릭 시 사용자가 입력한 아이디값을 전달하여 조회
+			// => 존재하는지 아닌지 여부를 확인 => 응답 데이터를 받는 것
+			
+			// 입력된 아이디 값 추출(jQuery)
+			const $userId = $("#mem-enroll-area input[name=userId]");
+			//console.log($userId, $userId.val());
+			//console.log("*** ajax 요청 전 ***");
+			
+			//$.ajax(요청정보);
+			// 요청 정보 : 객체 json 형태로  key/value 형태로 작성
+			/*
+				- url  : 요청 주소 
+				- type | method : 요청 방식(get, post..)
+				- data : 전달할 데이터 (json) {key:value, key:value, ..}
+				- success : 요청(통신) 성공 시 처리할 내용(함수)
+				- error : 요청(통신) 실패 시 처리할 내용(함수)
+				------------------
+				- async : 서버와의 비동기 통신 처리 여부(기본값: true)
+				- contentType: 요청 시 데이터 인코딩 방식
+				- dataType: 서버에서 응답 시 전달되는 데이터 형식 설정
+							(설정하지 않을 경우 자동으로 판단)
+					+ xml  : 트리 형태 데이터
+					+ json : 객체 (맵 형식) -> 일반적인 데이터 구조
+					+ html : html 형식 태그
+					+ text : 문자열 데이터 
+					...
+			*/
+			$.ajax({
+				url: 'idCheck',
+				data: {
+					userId: $userId.val()
+					},
+				type: 'get', //생략 가능
+				
+				success: function(){
+					//요청 성공 시
+					
+				},
+				error: function(){
+					//요청 실패 시
+				},
+				
+			})
+		}
 		// yyyy-mm-dd ---> yymmdd
 		// const makeBirth = (target) => {
 		function makeBirth(target) {
@@ -147,11 +198,12 @@
 		// 입력된 비밀번호 값과 비밀번호 확인 값이 같을 경우 true
 		// 다를 경우 false;
 		
-		function pwdCheck(){
+		function pwCheck(){
 			//비밀번호 일력값 -> name=userPwd
 			const pwd = document.querySelector("#mem-enroll-area input[name=userPwd]").value;
-			
-			const pwdCheck = document.getElementById("#mem-enroll-area input[name=userPwdCheck]").value;
+			 //=> $("#mem-enroll-area input[name=userPwd]").val();
+			//$('#userId').html();
+			const pwdCheck = document.getElementById("userPwdCheck").value;
 			
 			// 두 값이 다를 경우 false 리턴
 			if(pwd != pwdCheck){
