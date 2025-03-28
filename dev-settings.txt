@@ -1,0 +1,87 @@
+아파치 톰캣 사이트 접속 
+좌측 다운로드 > tomcat 9 > 9.0.102 버전 > core > zip 파일 다운로드 > dev 폴더에 넣기
+
+https://tomcat.apache.org/download-90.cgi
+
+
+자바 이클립스 인코딩
+general > workspace > encoding > utf-8
+general > editor> textEditor > spelling 
+web > css files /jsp files / html files / XML files > encoding > utf-8
+
+- 서버 환경 변수 설정
+server > runtime environments > add > 아파치 > 버전 9 > 설치한 톰캣 경로 입력 선택
+=> 문제가 없다면 하단의 경로가 나오고 문제있으면 오류메세지 나옴
+
+> 서버관련 설정을 바꿔도 파일처럼 저장해야 됨
+port > 8888 변경
+server option > serve modules without publishing (check)
+
+window > show view > navigator 설정해야 폴더 위주로 보임
+
+
+서버 프로젝트 열때 dynamic web project
+localhost:포트번호/프로젝트명(context root) 
+default output folder modify
+=> src/main/webapp/WEB-INF/classes
+
+generate web.xml deployment descriptor (check)
+
+서버 시작하는방법
+servers > 시작버튼 누르면 > 정보: 프로토콜 핸들러 ["http-nio-8888"]을(를) 시작합니다. 
+나오면 제대로 됨
+- 서버 등록 add and remove 원하는 다이나믹 웹 프로젝트를 등록 > 서버 재시작
+
+
+서블P릿 추가하기 
+src/main/java > new > servlet > class name = controller > url mappings 변경
+
+
+프로젝트 깃허브 페이지  레포토리 url 
+https://github.com/I-Union-I/i-union-i-semi
+
+JDBC_라이브러리 설치 방법
+
+톰캣 홈페이지에 들어가서 
+taglibs 들어가서 jar files 4개 다운로드해서
+자바 WEB-INF 폴더 > lib 폴더 안에 넣기
+
+서버초기 등록
+
+window > preference > server > runtime environment > add > Apache > 다운로드 한 해당 서버의 버전 > 다운로드 경로 설정 
+
+window > show view > servers > create server > 아파치 버전 
+포트 번호는 ports 에서 HTTP/1.1에서 수정
+server 옵션 
+- serve modules without publishing 체크해서 파일 찾기 편하도록 
+
+
+dynamic web project > welcome-file 위치 : Content directory에 추가 (현재: webapp 폴더 안에 index.jsp파일 )
+
+index.jsp 파일 추가 후 해당 파일이 브라우저에 표시되도록 할려면 
+1. 해당 프로젝트를 서버 모듈에 추가해 path - context root
+2. localhost:7777/mybatis 브라우저 url로 접근하면 화면이 나옴
+
+
+
+mybatis 접속 > start > jar > mybatis-3.5.17 다운로드 dev폴더에 위치> 자바 lib 폴더에 위치시키기
+
+resources폴더 추가 > properties > java Build path > source > add 해당 폴더
+	- > mybatis-config.xml 파일생성 https://mybatis.org/mybatis-3/ko/getting-started.html 브라우저의 xml설정 파일을 복사해옴
+ 파일내  설정 관련순서
+ (properties?, settings?, typeAliases?, typeHandlers?, objectFactory?, objectWrapperFactory?, 
+ reflectorFactory?, plugins?, environments?, databaseIdProvider?, mappers?)
+
+settings > typeAliases > environments > mappers
+
+WEB-INF > common/member/board 폴더 생성
+src/main/java
+
+https://blog.naver.com/soo02da/220801912869
+
+jquery CDN : minified 버전 다운로드
+
+json-simple > 다운로드 json-simple-1.1.1.jars > dev 폴더로 
+
+gson 라이브러리 사이트 > https://mvnrepository.com/  > gson 검색 > 사용량 많은 것 선택해 jar 파일 다운 > dev 폴더로 이동
+
