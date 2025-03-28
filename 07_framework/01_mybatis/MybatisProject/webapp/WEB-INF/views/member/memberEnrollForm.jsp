@@ -118,12 +118,13 @@
 			<br>
 			<br>
 			<div align="center">
-				<button class="btn btn-primary" type="submit" onclick="return pwCheck();">회원가입</button>
+				<button class="btn btn-primary" type="submit" onclick="return pwCheck();" disabled>회원가입</button>
 				<button class="btn btn-danger" type="reset">초기화</button>
 			</div>
 		</form>
 	</div>
 	<script>
+		
 		// 아이디 중복 체크 (비동기통신, ajax)
 		function idCheck(){
 			//[중복체크] 클릭 시 사용자가 입력한 아이디값을 전달하여 조회
@@ -160,15 +161,32 @@
 					},
 				type: 'get', //생략 가능
 				
-				success: function(){
+				success: function(result){
 					//요청 성공 시
+					if(result == 'YYY'){
+						alert("사용 가능한 아이디입니다");
+						$("#mem-enroll-area button[type=submit]").removeAttr("disabled");
+						
+						$("#mem-enroll-area input[name=userId]").attr("readonly", true);
+					}else{
+						alert("사용 사용중인 아이디입니다");
+						// 아이디 입력 요소 읽기전용으로 변경 
+						
+					}
+					// 사용 가능한 아이디입니다 출력
+					// 결과가 사용 가능할때 [회원가입] 버튼을 활성화
 					
 				},
-				error: function(){
+				error: function(err){
 					//요청 실패 시
-				},
+					console.log("*--- 아이디 중복 실패-----*");
+					// 사용 사용중인 아이디입니다 출력
+					// 회원가입 버튼 비활성 유지
+					alert(err);
 				
-			})
+				}
+				
+			});
 		}
 		// yyyy-mm-dd ---> yymmdd
 		// const makeBirth = (target) => {
