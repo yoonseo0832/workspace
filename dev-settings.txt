@@ -85,3 +85,8 @@ json-simple > 다운로드 json-simple-1.1.1.jars > dev 폴더로
 
 gson 라이브러리 사이트 > https://mvnrepository.com/  > gson 검색 > 사용량 많은 것 선택해 jar 파일 다운 > dev 폴더로 이동
 
+
+
+spring 사용하기
+
+https://spring.io/tools 방문에 윈도우에 해당하는 퉅 다운로드
