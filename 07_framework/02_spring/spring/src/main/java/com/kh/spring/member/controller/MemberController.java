@@ -215,15 +215,7 @@ public class MemberController {
 		return "member/mypage";
 	}
 	@PostMapping("/update")
-	public String updateMember(Member user, HttpSession session, Model model) { 
-
-		String userName = user.getUserName();
-		String email = user.getEmail();
-		String age = user.getAge();
-		String phone = user.getPhone();
-		String address = user.getAddress();
-		String gender = user.getGender();
-		
+	public String updateMember(Member user, HttpSession session, Model model) {
 		
 		return "member/update";
 	}

@@ -1,0 +1,47 @@
+package com.kh.spring.notice.service;
+
+import java.util.ArrayList;
+
+//import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+
+import com.kh.spring.notice.model.dao.NoticeDao;
+import com.kh.spring.notice.model.vo.Notice;
+//@Component
+@Service
+public class NoticeServiceImpl implements NoticeService{
+	private final NoticeDao nDao;
+	public NoticeServiceImpl(NoticeDao nDao) {
+		this.nDao=nDao;
+	}
+	@Override
+	public ArrayList<Notice> selectNoticeList() {
+		// TODO Auto-generated method stub
+		return (ArrayList<Notice>) nDao.selectNoticeList(); // 상위클래스라서 여기서 형변환 함
+	}
+
+	@Override
+	public Notice selectNoticeDetail(int noticeNo) {
+		// TODO Auto-generated method stub
+		return nDao.selectNoticeDetail(noticeNo);
+	}
+
+	@Override
+	public int insertNotice(Notice notice) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int updateNotice(Notice notice) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int deleteNotice(int noticeNo) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+}

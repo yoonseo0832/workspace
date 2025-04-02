@@ -5,9 +5,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+	main { height: 600px; }
+</style>
 </head>
 <body>
 	<jsp:include page="common/header.jsp" />
+	
+	<main></main>
 	
 	<jsp:include page="common/footer.jsp" />
 </body>
