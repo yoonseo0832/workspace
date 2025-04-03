@@ -12,5 +12,6 @@ public interface MemberDao {
 	// 로그인 - 데이터 조회
 	Member loginMember(Member member);
 	
+	// 수정
 	int updateMember(Member member);
 }

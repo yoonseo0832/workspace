@@ -216,7 +216,14 @@ public class MemberController {
 	}
 	@PostMapping("/update")
 	public String updateMember(Member user, HttpSession session, Model model) {
+		int result = mService.updateMember(user);
 		
-		return "member/update";
+		if(result > 0) {
+			session.setAttribute("alertMsg", "마이페이지 수정 성공");
+			return "redirect:/member/mypage";
+		}else {
+			model.addAttribute("errorMsg", "마이페이지 수정 실패!@");
+			return "common/errorPage";
+		}
 	}
 }

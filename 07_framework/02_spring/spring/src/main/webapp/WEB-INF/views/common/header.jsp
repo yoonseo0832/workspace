@@ -37,8 +37,8 @@
 		<!-- 로그인 후 보여질 화면 -->
         <div>
             <label>${loginUser.userName } 환영합니다.</label> &nbsp;&nbsp;
-            <a href="member/mypage">마이페이지</a>
-            <a href="member/logout">로그아웃</a>        
+            <a href="/member/mypage">마이페이지</a>
+            <a href="/member/logout">로그아웃</a>        
         </div> 
 	<%} %>
         

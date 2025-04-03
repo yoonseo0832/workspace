@@ -39,7 +39,7 @@
 	</select>
 	<update id="updateMember">
 		UPDATE MEMBER
-   		   SET NAME = #{userName}
+   		   SET USER_NAME = #{userName}
    		   	 , EMAIL = #{email}
    		   	 , AGE = #{age}
    		   	 , PHONE = #{phone}

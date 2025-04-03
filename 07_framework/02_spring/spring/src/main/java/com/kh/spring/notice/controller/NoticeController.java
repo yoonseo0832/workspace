@@ -27,6 +27,7 @@ public class NoticeController {
 	public NoticeController(NoticeService noticeService) {
 		this.noticeService = noticeService;
 	}
+
 	/**
 	 * 요청받는 주소 : /notice/list
 	 * @return
