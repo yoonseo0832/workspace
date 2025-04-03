@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.kh.spring.member.model.vo.Member,
+				com.kh.spring.notice.model.vo.Notice" %>
+<%
+	Member loginUser = (Member)session.getAttribute("loginUser");
+	Notice notice  = (Notice)request.getAttribute("n");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,7 +36,7 @@
         <div class="inner-area">
             <h2>공지사항 상세보기</h2>
             <br>
-            <a href="" class="btn btn-secondary" style="float:right;">목록보기</a>
+            <a href="/notice/list" class="btn btn-secondary" style="float:right;">목록보기</a>
             <br><br>
 
             <table align="center" class="table">
@@ -64,12 +70,14 @@
                 </tr>
             </table>
             <br>
-
+			<%if(notice != null && loginUser != null && notice.getNoticeWriter().equals(loginUser.getUserId())){  %>
+	
             <div align="center">
                 <!-- 작성자와 로그인한 계정이 동일한 경우만 표시 -->
-                <a href="" class="btn btn-primary">수정</a>
-                <a href="" class="btn btn-danger">삭제</a>
+                <a href="/notice/updateForm?no=${n.noticeNo}" class="btn btn-primary">수정</a>
+                <a href="/notice/delete?no=${n.noticeNo}" class="btn btn-danger">삭제</a>
             </div>
+            <%} %>
         </div>
         <br><br>
 

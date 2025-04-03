@@ -12,5 +12,4 @@ public class Notice {
 	private String noticeWriter;
 	private String noticeContent;
 	private Date createDate;
-	
 }

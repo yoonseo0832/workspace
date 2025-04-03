@@ -6,12 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.spring.notice.model.vo.Notice;
 import com.kh.spring.notice.service.NoticeService;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller		
 @RequestMapping("/notice")
@@ -61,5 +64,78 @@ public class NoticeController {
 		model.addAttribute("n", notice);
 		
 		return "notice/noticeDetail";		
+	}
+	
+	/**
+	 *	/notice/enrollForm 요청 받아
+	 *		공지사항 작성페이지 응답
+	 *		=> /WEB-INF/views/notice/enrollFrom.jsp
+	 */
+	@GetMapping("/enrollForm")
+	public String enrollForm() {
+		
+		return "notice/enrollForm";
+	}
+	/**
+	 *  /notice/write 요청 받아
+	 *  		전달된 공지사항 정보를 DB에 저장
+	 *  	성공 => 공지사항 목록으로 url 재요청
+	 *  	실패 => 에러페이지로 이동
+	 * @return
+	 */
+	@PostMapping("/write")
+	public String noticeWriter(Notice notice, Model model) {
+		
+		System.out.println(notice);
+		int result = noticeService.insertNotice(notice);
+		
+		if(result > 0) { 
+			// 공지사항 등록 성공
+			return "redirect:/notice/list";
+		}else {
+			// 공지사항 등록 실패
+			model.addAttribute("errorMsg", "공지사항 등록 실패!@");
+			return "common/errorPage";
+		}
+		//return "notice/write";
+	}
+	/**
+	 *  /notice/updateForm 요청을 받아
+	 *  		공지사항 수정 페이지 응답
+	 *  		=> WEB-INF/views/notice/updateForm.jsp
+	 */
+	@GetMapping("/updateForm")
+	public String updateForm(@RequestParam(value="no", defaultValue="0") int no, Model model) {
+		// 공지사항 번호에 해당하는 정보 조회
+		Notice notice = noticeService.selectNoticeDetail(no);
+		// 공지사항 데이터를 저장(request scope)
+		model.addAttribute("n", notice);
+		// 공지사항 수정 페이지 응답
+		return "notice/updateForm";
+	}
+	@PostMapping("/update")
+	public String updateNotice(Notice notice, Model model) {
+		int result = noticeService.updateNotice(notice);
+		System.out.println(result);
+		if(result > 0) {
+			return "redirect:/notice/detail?no="+notice.getNoticeNo();
+		}else {
+			model.addAttribute("errorMsg", "공지사항 수정 실패!@");
+			return "common/errorPage";
+		}
+	}
+	// 추가할때 => POST
+	@GetMapping("/delete")
+	public String deleteNotice(@RequestParam(defaultValue="0")int no, Model model, HttpSession session) {
+		int result = noticeService.deleteNotice(no);
+		if(result > 0) {
+			session.setAttribute("alertMsg", "공지사항 수정 성공");
+			
+			return "redirect:/notice/list";
+		}else {
+			model.addAttribute("errorMsg", "공지사항 수정 실패!@");
+			return "common/errorPage";
+		}
+	
 	}
 }

@@ -1,8 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.ArrayList, com.kh.spring.notice.model.vo.Notice" %>
+<%@ page import="java.util.ArrayList
+				, com.kh.spring.notice.model.vo.Notice
+				, com.kh.spring.member.model.vo.Member" %>
 <% 
 	ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("list");
+	Member loginUser = (Member)session.getAttribute("loginUser");
 %>
 <!DOCTYPE html>
 <html>
@@ -45,9 +48,11 @@
             <br>
 
             <%-- admin 계정일때만 글쓰기 버튼 표시 --%>
-            <a href="" class="btn btn-secondary" style="float:right">글쓰기</a>
-            <br>
-            
+            <%--loginUser가 null 이 아닌 경우에만 ㄴ나오도록 --%>
+            <%if(loginUser != null && loginUser.getUserId().equals("admin")){ %>
+            	<a href="/notice/enrollForm" class="btn btn-secondary" style="float:right">글쓰기</a>
+            	<br>
+            <%} %>
             <br>
             <table id="noticeList" class="table table-hover" align="center">
                 <thead>
@@ -100,7 +105,7 @@
     <jsp:include page="../common/footer.jsp" />
     <!-- Ele, Ele.. -->
     <script>
-    	onload = function (){
+    	window.addEventListener('load', function (){
     		const noticeTr = document.querySelectorAll("#noticeList tbody tr");
     		
     		for(const ele of noticeTr){
@@ -108,7 +113,7 @@
     				location.href="/notice/detail?no="+ ele.children[0].innerText;
     			}
     		}
-    	}
+    	})
     </script>
 </body>
 </html>

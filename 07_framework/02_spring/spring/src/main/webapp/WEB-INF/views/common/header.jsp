@@ -85,7 +85,10 @@
       		
       		<% session.removeAttribute("alertMsg"); %>
       	<% } %>
+      	
         window.onload = () => {            
+        	<%--if(location.pathname === '/') sesssionStorage.removeItem('menu');--%>
+        
             const menuList = document.querySelectorAll("nav div[data-url]");
             showMenu(menuList);
             addMenuClickEvent(menuList);
