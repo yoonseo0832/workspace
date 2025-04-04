@@ -2,10 +2,12 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList
 				, com.kh.spring.notice.model.vo.Notice
-				, com.kh.spring.member.model.vo.Member" %>
+				, com.kh.spring.member.model.vo.Member
+				, com.kh.spring.common.PageInfo" %>
 <% 
 	ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("list");
 	Member loginUser = (Member)session.getAttribute("loginUser");
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
 %>
 <!DOCTYPE html>
 <html>
@@ -76,22 +78,41 @@
                 </tbody>
             </table>
             <br>
-
+			<%
+				int currPage = 0, startPage = 0, endPage = 0, maxPage = 0;
+			
+				if(pi !=null){
+					currPage = pi.getCurrPage();
+					startPage = pi.getStartPage();
+					endPage = pi.getEndPage();
+					maxPage = pi.getMaxPage();
+				}
+			%>
             <div id="pagingArea">
                 <ul class="pagination">
-                    <li class="page-item"><a href="" class="page-link">Prev</a></li>
-                    <li class="page-item"><a href="" class="page-link">1</a></li>
-                    <li class="page-item"><a href="" class="page-link">2</a></li>
-                    <li class="page-item"><a href="" class="page-link">3</a></li>
-                    <li class="page-item"><a href="" class="page-link">4</a></li>
-                    <li class="page-item"><a href="" class="page-link">5</a></li>
-                    <li class="page-item"><a href="" class="page-link">Next</a></li>
+                	<%--현재 페이지가 1일때 비활성화 --%>
+                	<%if(currPage ==1){ %>
+                    	<li class="page-item disabled"><a class="page-link">Prev</a></li>
+                    <%}else{ %>
+                    	<li class="page-item"><a href="/notice/list?cpage=<%=currPage -1 %>" class="page-link">Prev</a></li>
+                    <%} %>
+                    <%-- 반복문을 이용해 시작번호/끝번호 활용해 표시 --%>
+                    <%for(int p = startPage; p<=endPage; p++){ %>
+                    <%--<a href="/notice/list?cpage=<%=p %>" : 해당 페이지의 번호에 페이지로 넘어가도록 --%>
+                    <li class="page-item"><a href="/notice/list?cpage=<%=p %>" class="page-link"><%=p %></a></li>
+                    <%} %>
+                    <%--현재 페이지가 마지막 번호 일때 비활성화 --%>
+                    <%if(currPage == endPage){ %>
+                    	<li class="page-item disabled"><a class="page-link">Next</a></li>
+                	<%}else{ %>
+                		<li class="page-item"><a href="/notice/list?cpage=<%=currPage +1 %>" class="page-link">Next</a></li>
+                	<%} %>
                 </ul>
             </div>
 
             <br clear="both">
 
-            <form action="" id="searchForm">
+            <form action="/notice/search" id="searchForm">
                 <div class="text">
                     <input type="text" class="form-control" name="keyword" placeholder="검색할 제목을 입력하세요.">
                 </div>

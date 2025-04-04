@@ -9,6 +9,10 @@
 			 , NOTICE_WRITER
 			 , CREATE_DATE 
 		FROM NOTICE 
+		WHERE 1=1
+			<if test="keyword != null">
+				AND NOTICE_TITLE LIKE '%' || #{keyword} || '%'
+			</if>
 		ORDER BY NOTICE_NO DESC
 	</select>
 	<select id="selectNoticeDetail" resultType="Notice">
@@ -20,6 +24,15 @@
 		FROM NOTICE 
 		WHERE NOTICE_NO = #{noticeNo}
 	</select>
+	
+	<select id="selectNoticeCount" resultType="_int">
+		SELECT COUNT(*) FROM NOTICE
+		WHERE 1=1
+			<if test="keyword !=null">
+				AND NOTICE_TITLE LIKE '%' || #{keyword} || '%' 
+			</if>
+	</select>
+	
 	<insert id="insertNotice">
 		INSERT INTO NOTICE 
 					VALUES (SEQ_NNO.NEXTVAL
