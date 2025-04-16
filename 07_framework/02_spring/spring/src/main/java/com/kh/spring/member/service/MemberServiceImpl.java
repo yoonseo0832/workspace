@@ -8,7 +8,7 @@ import com.kh.spring.member.model.vo.Member;
 
 import lombok.RequiredArgsConstructor;
 
-@RequiredArgsConstructor	// 필드로 선언된 객체(빈)를 생성자 방식으로 주입 기능
+@RequiredArgsConstructor	// 필드로 선언된 객체(빈)를 생성자 방식으로 주입 기능, lombok 설정 확인 M
 @Service  // @Component 보다 좀 더 구체화된 객체를 의미! => Service bean 등록
 public class MemberServiceImpl implements MemberService {
 	private final MemberDao mDao;

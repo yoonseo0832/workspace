@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kh.spring.board.model.dao.BoardDao">
+
+	<select id="selectBoardList" resultType="Board">
+		SELECT BOARD_NO
+		, BOARD_TITLE
+		, BOARD_WRITER
+		, COUNT
+		, CREATE_DATE
+		, ORIGIN_NAME
+		FROM BOARD
+		WHERE STATUS = 'Y'
+		<if test="condition == 'writer'">
+			AND BOARD_WRITER LIKE '%' || #{keyword} || '%'
+		</if>
+		<if test="condition == 'title'">
+			AND BOARD_TITLE LIKE '%${keyword}%'
+		</if>
+		<if test="condition == 'content'">
+			AND BOARD_CONTENT LIKE '%${keyword}%'
+		</if>
+		ORDER BY BOARD_NO DESC
+	</select>
+
+	<select id="selectBoardCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM BOARD
+		WHERE STATUS = 'Y'
+
+		<if test="condition == 'writer'">
+			AND BOARD_WRITER LIKE '%' || #{keyword} || '%'
+		</if>
+		<if test="condition == 'title'">
+			AND BOARD_TITLE LIKE '%${keyword}%'
+		</if>
+		<if test="condition == 'content'">
+			AND BOARD_CONTENT LIKE '%${keyword}%'
+		</if>
+		<choose>
+			<when test="orderby == 'count'">
+				ORDER BY COUNT DESC
+			</when>
+			<otherwise>
+				ORDER BY BOARD_NO DESC
+			</otherwise>
+		</choose>
+
+
+	</select>
+
+	<resultMap id="boardResultMap" type="Board">
+		<result column="BOARD_NO" property="boardNo" />
+		<result column="title" property="boardTitle" />
+		<result column="board_title" property="boardTitle" />
+		<result column="BOARD_WRITER" property="boardWriter" />
+		<result column="CREATE_DATE" property="createDate" />
+		<result column="origin_name" property="originName" />
+		<result column="change_name" property="changeName" />
+		<result column="board_content" property="boardContent" />
+	</resultMap>
+
+	<select id="selectBoardDetail" resultMap="boardResultMap">
+		SELECT BOARD_NO
+		, BOARD_TITLE title
+		, BOARD_WRITER
+		, CREATE_DATE
+		, ORIGIN_NAME
+		, CHANGE_NAME
+		, BOARD_CONTENT
+		FROM BOARD
+		WHERE STATUS = 'Y'
+		AND BOARD_NO = #{boardNo}
+	</select>
+
+	<select id="selectReplyList" resultType="Reply">
+		SELECT REPLY_NO
+		, REPLY_CONTENT
+		, REPLY_WRITER
+		, CREATE_DATE
+		FROM REPLY
+		WHERE REF_BNO = #{boardNo}
+		AND STATUS = 'Y'
+		ORDER BY REPLY_NO DESC
+	</select>
+
+	<update id="increaseCount">
+		UPDATE BOARD
+		SET COUNT = COUNT + 1
+		WHERE BOARD_NO = #{boardNo}
+	</update>
+
+	<update id="deleteBoard">
+		UPDATE BOARD
+		SET STATUS = 'N'
+		WHERE BOARD_NO = #{boardNo}
+	</update>
+
+	<insert id="insertBoard">
+		INSERT INTO BOARD (BOARD_NO
+		, BOARD_TITLE
+		, BOARD_WRITER
+		, BOARD_CONTENT
+		, ORIGIN_NAME
+		, CHANGE_NAME)
+		VALUES (SEQ_BNO.NEXTVAL
+		, #{boardTitle}
+		, #{boardWriter}
+		, #{boardContent}
+		, #{originName}
+		, #{changeName})
+	</insert>
+
+	<update id="updateBoard">
+		UPDATE BOARD
+		SET BOARD_TITLE = #{boardTitle}
+		, ORIGIN_NAME = #{originName}
+		, CHANGE_NAME = #{changeName}
+		, BOARD_CONTENT = #{boardcontent}
+		, CREATE_DATE = #{SYSDATE}
+		WHERE BOARD_NO = #{boardNo} AND STATUS = 'Y'
+	</update>
+
+	<insert id="insertReply">
+		INSERT INTO BOARD (REPLY_NO
+		, REPLY_CONTENT
+		, REF_BNO
+		, REPLY_WRTITER)
+		VALUES (SEQ_RNO.NEXTVAL
+		, #{replyContent}
+		, #{refBno}
+		, #{replyWriter}
+	</insert>
+
+	<select id="selectTop5BoardList" resultMap="boardResultMap">
+		SELECT BOARD_NO
+		, BOARD_TITLE
+		, BOARD_WRITER
+		, MAX(COUNT)
+		, CREATE_DATE
+		, ORIGIN_NAME
+		, CHANGE_NAME
+		FROM BOARD
+		WHERE ROWNUM >= 5
+	</select>
+</mapper>

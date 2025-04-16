@@ -1,8 +1,5 @@
 package com.kh.spring.common;
 
-import lombok.Getter;
-
-@Getter
 public class PageInfo {
 	/**
 	 * ===== 페이징 처리를 위한 준비 작업 =====
@@ -28,6 +25,34 @@ public class PageInfo {
 	private int startPage; //페이징바 시작 번호
 	private int endPage; //페이징바 끝 번호
 	
+	public int getListCount() {
+		return listCount;
+	}
+
+	public int getCurrPage() {
+		return currPage;
+	}
+
+	public int getPageLimit() {
+		return pageLimit;
+	}
+
+	public int getBoardLimit() {
+		return boardLimit;
+	}
+
+	public int getMaxPage() {
+		return maxPage;
+	}
+
+	public int getStartPage() {
+		return startPage;
+	}
+
+	public int getEndPage() {
+		return endPage;
+	}
+
 	public PageInfo(int listCount, int currPage, int pageLimit, int boardLimit) {
 		this.listCount = listCount;
 		this.currPage = currPage;

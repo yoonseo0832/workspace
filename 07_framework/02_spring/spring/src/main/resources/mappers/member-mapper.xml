@@ -23,7 +23,7 @@
 				  , #{phone}
 				  , #{address})
 	</insert>
-	<select id="loginMember" resultType="Member">
+	<select id="loginMember" resultType="com.kh.spring.member.model.vo.Member">
 		SELECT USER_ID
 				, USER_PWD
 				, USER_NAME

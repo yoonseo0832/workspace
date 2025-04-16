@@ -34,7 +34,7 @@ public class NoticeController {
 	 * @return
 	 */
 	@GetMapping("/list") //반환 타입 String X => ModelAndView
-	public ModelAndView noticeList(@RequestParam(value="cpage", defaultValue="1") int currPage
+	public ModelAndView noticeList(@RequestParam(value="cpage", defaultValue="1") int cpage
 									,ModelAndView mv) {
 		//System.out.println("요청중");
 		//return "redirect:/"; // 임시
@@ -51,7 +51,7 @@ public class NoticeController {
 		int pageLimit = 10; // 페이징바 개수
 		int boardLimit = 5; // 한 페이지 당 표시할 게시글 수
 		
-		PageInfo pi = new PageInfo(listCount, currPage, pageLimit, boardLimit);
+		PageInfo pi = new PageInfo(listCount, cpage, pageLimit, boardLimit);
 		
 		mv.addObject("pi",pi);
 		// request 영역에 조회된 목록을 저장 => Model

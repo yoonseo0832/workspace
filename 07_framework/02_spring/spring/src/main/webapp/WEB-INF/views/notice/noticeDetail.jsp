@@ -84,6 +84,17 @@
     </div>
 
     <%-- footer --%>
-    <jsp:include page="../common/footer.jsp" />    
+    <jsp:include page="../common/footer.jsp" />  
+    <script>
+    	window.addEventListener('load', function (){
+    		const  boardTr = document.querySelectorAll("#boardList tbody tr");
+    		
+    		for(const ele of boardTr){
+    			ele.onclick= function(){
+    				location.href="/board/detail?no="+ ele.children[0].innerText;
+    			}
+    		}
+    	})
+    </script>  
 </body>
 </html>

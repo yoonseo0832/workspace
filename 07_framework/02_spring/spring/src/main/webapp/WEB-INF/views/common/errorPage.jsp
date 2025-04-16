@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>ERROR</title>
+<title>Insert title here</title>
 </head>
 <body>
 	<%
@@ -22,7 +22,5 @@
 
     <%-- footer 포함 --%>
 	<jsp:include page="footer.jsp" />
-</body>
-</html>
 </body>
 </html>
