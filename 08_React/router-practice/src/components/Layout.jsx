@@ -1,13 +1,28 @@
 import {Routes, Route, useParams} from 'react-router-dom';
+function MenuTemplate(){
+    const { no } = useParams();
+  
+    return(
+      <p>Menu{no} 페이지</p>
+    );
+  
+  }
+function ParentComponent(){
+    return(
+        <>parent</>
+    );
+}
+function Child1(){
+    return(
+        <>Child1</>
+    );
+}
+function Child2(){
+    return(
+        <>Child2</>
+    );
+}
 function Layout() {
-    function MenuTemplate(){
-        const { no } = useParams();
-      
-        return(
-          <p>Menu{no} 페이지</p>
-        );
-      
-      }
     return (
         <>
             <Routes>
@@ -18,6 +33,7 @@ function Layout() {
         <Route path="/menu2" element={<p>Menu2 페이지</p>} />
         */}
                 <Route path="/menu/:no" element={<MenuTemplate />} />
+
             </Routes>
         </>
     );

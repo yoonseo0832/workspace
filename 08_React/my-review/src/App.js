@@ -1,30 +1,25 @@
 import './App.css';
-import { useEffect, useState } from 'react';
-
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import Timer from './components/Timer';
+import CountLetters from './components/CountLetters';
 function App() {
-  const [now, setNow] = useState(new Date());
-  // 1초 마다 now 상태를 현재 말짜시간으로 변경 ==> setInterval(함수,시간) : 시간마다 함수 내용을 실행
-  // setImter(함수, 시간) : 일정 시간 뒤에 함수 내용을 실행, clearInterval()
-  useEffect(()=>{
-    const timer = setInterval(()=>{
-      setNow(new Date());
-    }, 1*1000);
-
-    return() => {
-      // 컴포넌트가 소멸될 때 타이머 정리 --> clearInterval(대상타이머)
-      clearInterval(timer);
-    }
-  }, []);
-
-  
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>현재 시간</h1>
-        <p>{now.toLocaleDateString()}</p>
-        <p>{now.toLocaleTimeString()}</p>
-      </header>
-    </div>
+    <BrowserRouter>
+
+      <div className="container">
+        <nav>
+          <Link to="/">HOME</Link>
+          <Link to="/timer">타이머</Link>
+          <Link to="/count/letters" >글자수세기</Link>
+        </nav>
+      </div>
+
+      <Routes>
+        <Route path="/" element={<div className="outer" style={{ height: '600px', backgroundColor:'orange', textAlign:'center'}}>메인페이지</div>}></Route>
+        <Route path="/timer" element={<Timer />}></Route>
+        <Route path="/count/letters" element={<CountLetters />}></Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 

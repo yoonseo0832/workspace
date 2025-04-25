@@ -1,0 +1,8 @@
+.wrap{
+    overflow-x: hidden;
+    min-width: 1340px;
+}
+Header{
+    width: 1280px;
+    margin: 0 auto;
+}
