@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+
 export default function Login() {
   const divStyle = {
     width: "470px",
@@ -7,6 +8,7 @@ export default function Login() {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    margin: "0px auto",
   };
 
   const innerDivStyle = {
@@ -64,23 +66,26 @@ export default function Login() {
     display: "block",
     marginTop: "30px",
   };
+
   return (
-    <div style={divStyle}>
-      <div style={innerDivStyle}>
-        <h1 style={h1Style}>TODO MANAGER</h1>
-        <div style={inputContainerStyle}>
-          <input type="text" placeholder="아이디" style={inputStyle} />
-          <button style={buttonStyle}>중복체크</button>
+    <div className="root">
+      <div style={divStyle}>
+        <div style={innerDivStyle}>
+          <h1 style={h1Style}>TODO MANAGER</h1>
+          <div style={inputContainerStyle}>
+            <input type="text" placeholder="아이디" style={inputStyle} />
+            <button style={buttonStyle}>중복체크</button>
+          </div>
+          <input type="password" placeholder="비밀번호" style={inputStyle} />
+          <input type="text" placeholder="닉네임" style={inputStyle} />
+          <div style={inputContainerStyle}>
+            <input type="email" placeholder="이메일" style={inputStyle} />
+            <button style={buttonStyle}>인증</button>
+          </div>
+          <Link to="/todo" style={linkStyle}>
+            회원가입
+          </Link>
         </div>
-        <input type="password" placeholder="비밀번호" style={inputStyle} />
-        <input type="text" placeholder="닉네임" style={inputStyle} />
-        <div style={inputContainerStyle}>
-          <input type="email" placeholder="이메일" style={inputStyle} />
-          <button style={buttonStyle}>인증</button>
-        </div>
-        <Link to="/todo" style={linkStyle}>
-          회원가입
-        </Link>
       </div>
     </div>
   );

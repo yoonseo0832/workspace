@@ -51,6 +51,8 @@ export default function Login() {
         height: "100vh",
         margin: "0 auto",
         top: "500px",
+        justifyContent: "center",
+        alignItems: "center",
       }}
     >
       <div style={divStyle}>
@@ -59,7 +61,7 @@ export default function Login() {
           <br />
           MANAGER
         </h1>
-        <div>
+        <div style={{ textAlign: "center" }}>
           <input type="text" placeholder="아이디" style={inputStyle1} />
           <br />
           <input type="password" placeholder="비밀번호" style={inputStyle2} />
