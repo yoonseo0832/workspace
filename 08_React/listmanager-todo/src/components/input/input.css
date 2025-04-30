@@ -1,0 +1,43 @@
+input {
+  width: 100%;
+  height: 45px;
+  background-color: #fff;
+  font-size: 1rem;
+  padding: 1rem;
+  margin: 0;
+  margin-bottom: 16px;
+  color: black;
+  border-radius: 5px;
+  border: 1px solid #dddddd;
+}
+
+input[type="button"] {
+  padding: 0;
+}
+
+.btn {
+  border: none;
+  cursor: pointer;
+  margin: 0;
+}
+.btn-sm {
+  width: 100px;
+  cursor: pointer;
+}
+
+.btn-blue {
+  background-color: #5087b5;
+  color: #fff;
+}
+.btn-white {
+  background-color: #fff;
+  color: #000;
+}
+.btn-green {
+  background-color: #6baf92;
+  color: #fff;
+}
+.btn-red {
+  background-color: #d46868;
+  color: #fff;
+}

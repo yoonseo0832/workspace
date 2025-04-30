@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-
+import "../App.css";
 export default function Login() {
   const divStyle = {
     width: "470px",
@@ -66,9 +66,13 @@ export default function Login() {
     display: "block",
     marginTop: "30px",
   };
-
+  const rootStyle = {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  };
   return (
-    <div className="root">
+    <div style={rootStyle}>
       <div style={divStyle}>
         <div style={innerDivStyle}>
           <h1 style={h1Style}>TODO MANAGER</h1>
@@ -82,7 +86,11 @@ export default function Login() {
             <input type="email" placeholder="이메일" style={inputStyle} />
             <button style={buttonStyle}>인증</button>
           </div>
-          <Link to="/todo" style={linkStyle}>
+          <div style={inputContainerStyle}>
+            <input type="text" placeholder="인증코드" style={inputStyle} />
+            <button style={buttonStyle}>확인</button>
+          </div>
+          <Link to="/" style={linkStyle}>
             회원가입
           </Link>
         </div>
