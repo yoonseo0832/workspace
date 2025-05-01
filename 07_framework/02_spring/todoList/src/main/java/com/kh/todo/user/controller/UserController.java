@@ -57,4 +57,20 @@ public class UserController {
     return result ? "success" : "failed";
     
   }
+  
+  /**
+   * 아이디 중복 체크
+   * [POST] /checkId
+   * @param id 아이디
+   * @return "nnnnn" 중복된 아이디 ,  "nnnny" 사용 가능한 아이디
+   */
+  @PostMapping("/checkId")
+  public String checkIdIsSame(@RequestBody Map<String, Object> requestBody) {
+    String id = (String)requestBody.get("id");
+    
+    // 서비스로부터 중복체크 결과 -> 사용자 테이블에서 id에 해당하는 개수를 조회하는 거임
+    int result =0;
+    
+    return result > 0 ? "nnnnn":"nnnny";
+  }
 }

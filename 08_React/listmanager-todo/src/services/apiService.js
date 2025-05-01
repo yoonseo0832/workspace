@@ -14,3 +14,8 @@ export const verifyEmail = async (email, code) => {
   const response = apiAxios.post("/email/verify", { email: email, code: code });
   return response.data;
 };
+
+export const checkId = async (id) => {
+  const response = apiAxios.post("/id/check", { id: id });
+  return response.data;
+};

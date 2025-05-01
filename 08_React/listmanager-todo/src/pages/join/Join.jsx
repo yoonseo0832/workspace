@@ -6,8 +6,15 @@ import { verifyEmail, sendEmail } from "../../services/apiService";
 
 const shortInputStyle = { width: "290px", marginRight: "10px" };
 export default function Join() {
+  const [id, setId] = useState("");
   const [email, setEmail] = useState("");
   const [code, setCode] = useState("");
+
+  const checkIdHandler = (inputId) => {
+    setId(inputId);
+    id;
+  };
+
   const sendHandler = async () => {
     //alert(`입력된 이메일: ${email}`);
 
@@ -25,10 +32,15 @@ export default function Join() {
       <Input
         type="text"
         placeholder="아이디"
+        onChange={(e) => setId(e.target.value)}
         style={shortInputStyle}
-        required
       />
-      <Input type="button" value="중복체크" className="btn-white btn-sm" />
+      <Input
+        type="button"
+        value="중복체크"
+        className="btn-white btn-sm"
+        onClick={checkIdHandler}
+      />
       <Input type="password" placeholder="비밀번호" />
       <Input type="text" placeholder="닉네임" />
       <Input
