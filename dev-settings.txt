@@ -90,3 +90,20 @@ gson 라이브러리 사이트 > https://mvnrepository.com/  > gson 검색 > 사
 spring 사용하기
 
 https://spring.io/tools 방문에 윈도우에 해당하는 퉅 다운로드
+
+
+
+mapper 파일 작성 시 필요한 코드와 위치
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.mybatis.example.BlogMapper">
+  <select id="selectBlog" resultType="Blog">
+    select * from Blog where id = #{id}
+  </select>
+</mapper>
+
+- mybatis 홈페이지에서 getting started -> Exploring Mapped SQL Statements 에 위치한 코그임 위의 코드와 (<!DOCTYPE mapper)
+
+POST http://localhost:8080/checkId net::ERR_CONNECTION_REFUSED 오류 메세지 나온다면 스프링의 서버가 켜져 있는지 확인해보기

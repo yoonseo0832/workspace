@@ -1,11 +1,14 @@
 package com.kh.todo.user.controller;
 
 import java.util.Map;
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import com.kh.todo.user.model.dto.UserDTO;
 import com.kh.todo.user.service.MailService;
+import com.kh.todo.user.service.UserService;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 
@@ -14,6 +17,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor        // lombok을 이용하여 생성자 주입 처리
 public class UserController {
   private final MailService mailService;
+  private final UserService userService;
   /**
    * 이메일은 전달받아 인증코드를 메일로 전송
    * @Param email
@@ -69,8 +73,15 @@ public class UserController {
     String id = (String)requestBody.get("id");
     
     // 서비스로부터 중복체크 결과 -> 사용자 테이블에서 id에 해당하는 개수를 조회하는 거임
-    int result =0;
+    boolean result = userService.checkId(id);
     
-    return result > 0 ? "nnnnn":"nnnny";
+    return result ? "nnnnY":"nnnnN";
+  }
+  
+  
+  @PostMapping("/user")
+  public String userRegister(@RequestBody UserDTO userDto) {
+    int result = userService.userRegister(userDto);
+    return result > 0?"success":"failed"; 
   }
 }

@@ -6,16 +6,25 @@ const apiAxios = axios.create({
 });
 
 export const sendEmail = async (email) => {
-  const response = apiAxios.post("/email/send", { email: email });
+  const response = await apiAxios.post("/email/send", { email: email });
   return response.data;
 };
 
 export const verifyEmail = async (email, code) => {
-  const response = apiAxios.post("/email/verify", { email: email, code: code });
+  const response = await apiAxios.post("/email/verify", {
+    email: email,
+    code: code,
+  });
   return response.data;
 };
 
 export const checkId = async (id) => {
-  const response = apiAxios.post("/id/check", { id: id });
+  const response = await apiAxios.post("/checkId", { id: id });
+  // status ; 통신 상태 코드 / data: 응답 데이터
+  return response.data;
+};
+
+export const registUser = async (user) => {
+  const response = await apiAxios.post("/user", user);
   return response.data;
 };
