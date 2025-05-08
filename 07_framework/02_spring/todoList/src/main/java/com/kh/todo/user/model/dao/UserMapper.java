@@ -28,4 +28,9 @@ public class UserMapper {
      int result =sqlSession.insert("userMapper.insertUser", userDto);
      return result;
   }
+
+  public UserDTO selectByUserIdAndUserPwd(UserDTO userDto) {
+    // TODO Auto-generated method stub
+    return sqlSession.selectOne("userMapper.selectByUserIdAndUserPwd", userDto);
+  }
 }

@@ -8,6 +8,13 @@
     FROM TB_USER 
     WHERE USER_ID = #{userId}
   </select>
+  <select id="selectByUserIdAndUserPwd" resultType="UserDTO">
+  	SELECT 	USER_ID
+  			, NICKNAME
+  			, EMAIL
+  	FROM TB_USER
+  	WHERE USER_ID = #{userId} and USER_PWD = #{userPwd}
+  </select>
   <insert id="insertUser">
   	INSERT INTO TB_USER VALUES (
   							#{userId},

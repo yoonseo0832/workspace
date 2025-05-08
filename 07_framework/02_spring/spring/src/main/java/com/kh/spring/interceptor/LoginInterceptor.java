@@ -54,5 +54,5 @@ public class LoginInterceptor implements HandlerInterceptor {
 			return false;
 		}
 	}
-	
+	// 모두 작성하고 webconfig 파일에 오버라이딩하면 됨 (addInterceptors)
 }

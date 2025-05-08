@@ -64,6 +64,11 @@
     		<groupId>com.oracle.database.jdbc</groupId>
     		<artifactId>ojdbc11</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.kh</groupId>
+			<artifactId>spring</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 
 	<build>

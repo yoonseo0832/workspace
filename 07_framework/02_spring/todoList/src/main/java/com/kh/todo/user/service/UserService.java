@@ -32,4 +32,13 @@ public class UserService{
   public int userRegister(UserDTO userDto) {
      return userMapper.insertUser(userDto);
   }
+
+  /**
+   * 로그인
+   * @param UserDTO userDto 아이디/비번
+   * @return UserDTO 회원정보(아이디, 닉네임, 이메일)
+   */
+  public UserDTO loginUser(UserDTO loginUser) {
+    return userMapper.selectByUserIdAndUserPwd(loginUser);
+  }
 }
