@@ -6,18 +6,27 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import com.kh.todo.interceptor.LoginInterceptor;
+import jakarta.annotation.PostConstruct;
 
 @Configuration
 public class WebConfig implements WebMvcConfigurer{
   private final LoginInterceptor loginInterceptor;
   public WebConfig(LoginInterceptor loginInterceptor) {
-    this.loginInterceptor=loginInterceptor;
+      this.loginInterceptor = loginInterceptor;
+  }
+  
+  @PostConstruct
+  public void initialize() throws Exception {
+    System.out.println("WebConfig --------------");
   }
   
   @Value("${client.origins}")
   private String origins;
+  
   @Override
   public void addCorsMappings(CorsRegistry registry) {
+    
+    System.out.println(origins);    
     registry.addMapping("/**")
         .allowedMethods("GET", "POST", "PUT", "DELETE")
         .allowedOrigins(origins)

@@ -9,7 +9,7 @@
     WHERE USER_ID = #{userId}
   </select>
   <select id="selectByUserIdAndUserPwd" resultType="UserDTO">
-  	SELECT 	USER_ID
+  	SELECT 	USER_ID userId
   			, NICKNAME
   			, EMAIL
   	FROM TB_USER
