@@ -1,0 +1,5 @@
+빌드 오류 발생(원인: 자바11을 사용하는데 자바17로설정해서 )
+- 환경변수 변경 11-> 17 bin까지
+- spring boot `window -> preferences -> gradle -> JAVA HOME : C:\dev\java\jdk-17.0.12` 자바17 설치 파일 경로 넣기
+
+- 이메일로 파일을 보낼 때는 src 폴더와 build.gradle, settings.gradle 파일만 보내면 됨
