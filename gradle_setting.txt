@@ -3,3 +3,6 @@
 - spring boot `window -> preferences -> gradle -> JAVA HOME : C:\dev\java\jdk-17.0.12` 자바17 설치 파일 경로 넣기
 
 - 이메일로 파일을 보낼 때는 src 폴더와 build.gradle, settings.gradle 파일만 보내면 됨
+
+참고자료 테이블
+https://whalewell.tistory.com/255 
