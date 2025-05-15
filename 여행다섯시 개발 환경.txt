@@ -1,0 +1,83 @@
+F:리액트(npm)
+- react-date-range
+- react-router-dom
+- axios
+- toastify
+- react-query
+- zustand 
+- react
+스타일 : SCSS, react-icon
+
+build : vite
+
+B:스프링  spring 
+- mybatis
+- google style guide
+- lombok
+- spring web
+- spring boot
+
+
+openAPI (공공데이터포털)
+- 한국관광공사_국문 관광정보 서비스_GW
+
+외부 API
+- 카카오 맵 API
+- 카카오 소셜 로그인 API
+- 구글 소셜 로그인 API
+- 네이버 소셜 로그인 API
+
+프런트 엔드: FE | 백엔드:BE
+
+브랜치명 : feature/코드명
+
+ex) feature/clientGnb
+
+npm install react-date-range react-router-dom axios react-toastify @tanstack/react-query zustand
+
+
+필터에 있는 가격 범위 슬라이더 npm install rc-slider 라이브러
+
+// PriceRangeSlider.jsx
+import React, { useState } from 'react';
+import Slider from 'rc-slider';
+import 'rc-slider/assets/index.css';
+
+const PriceRangeSlider = () => {
+  const [range, setRange] = useState([30000, 300000]);
+
+  const handleSliderChange = (value) => {
+    setRange(value);
+  };
+
+  return (
+    <div style={{ width: '300px', margin: '2rem auto' }}>
+      <label style={{ fontWeight: 'bold', display: 'block', marginBottom: '8px' }}>
+        가격 <span style={{ fontSize: '12px', color: '#888' }}>1박 기준</span>
+      </label>
+      <Slider
+        range
+        min={0}
+        max={500000}
+        step={1000}
+        defaultValue={range}
+        onChange={handleSliderChange}
+        trackStyle={[{ backgroundColor: '#007aff' }]}
+        handleStyle={[{ borderColor: '#007aff' }, { borderColor: '#007aff' }]}
+      />
+      <div style={{ marginTop: '10px', color: '#007aff', fontWeight: 'bold' }}>
+        {range[0].toLocaleString()}원 ~ {range[1].toLocaleString()}원
+      </div>
+    </div>
+  );
+};
+
+export default PriceRangeSlider;
+
+- 숙박업체 관련 참고할 웹페이지
+https://syleemomo.tistory.com/85
+https://github.com/seungsimdang/NINESTAY/tree/main/src
+
+https://github.com/plusandplus/
+https://velog.io/@kykim_dev/Project-%EB%A7%A5%EC%A3%BC%EC%99%80-%ED%95%A8%EA%BB%98%ED%95%98%EB%8A%94-%EC%88%99%EC%86%8C-%EC%98%88%EC%95%BD-%EC%84%9C%EB%B9%84%EC%8A%A4-BeerBnB
+https://lemonjade.tistory.com/34
