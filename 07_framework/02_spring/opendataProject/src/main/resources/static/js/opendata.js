@@ -167,5 +167,6 @@ const displayPagination = (totalCount, pageNo, numOfRows) => {
 	
 	liPrev.appendChild(aPrev);
 	
-	
+	const liNum = document.createElement("li");
+	liNum.classList.add("page-item");
 }
