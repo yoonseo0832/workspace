@@ -1,16 +1,19 @@
-import { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
-import PriceRangeSlider from "./priceRange.utils";
+//import SearchBar from "./components/SearchBar";
+import FilterPanel from "./components/FilterPenal";
+import SearchBar from "./components/SearchBar";
+import KakaoMap from "./components/KakaoMap";
+import AccommodationListPage from "./pages/AccommodationListPage";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
-    <>
-      <PriceRangeSlider />
-    </>
+    <div>
+      <SearchBar />
+
+      <AccommodationListPage />
+    </div>
   );
 }
 
