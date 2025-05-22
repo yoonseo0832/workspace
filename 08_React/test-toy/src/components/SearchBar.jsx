@@ -26,7 +26,7 @@ const SearchBar = () => {
       "~",
       format(dateRange.endDate, "MM.dd (eee)", { locale: ko })
     );
-    console.log("숙박일수:", nights, "박", nights + 1, "일");
+    console.log("숙박일수:", nights, "박", nights);
     console.log("인원:", guests);
   };
 
@@ -92,25 +92,14 @@ const SearchBar = () => {
         </span>
       </div>
 
-      <div
-        style={{
-          flex: 1,
-          display: "flex",
-          alignItems: "center",
-          background: "#9e7dff",
-          padding: "12px",
-          borderRadius: "8px",
-        }}
-      >
+      <div>
         {Array.from({ length: 8 }, (_, idx) => (
           <FaUser
             key={idx}
             onClick={() => setGuests(idx + 1)}
             style={{
-              marginRight: "4px",
               color: idx < guests ? "#fff" : "#d1c3ff",
               cursor: "pointer",
-              fontSize: "16px",
             }}
           />
         ))}

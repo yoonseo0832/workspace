@@ -10,8 +10,6 @@ import AccommodationListPage from "./pages/AccommodationListPage";
 function App() {
   return (
     <div>
-      <SearchBar />
-
       <AccommodationListPage />
     </div>
   );
