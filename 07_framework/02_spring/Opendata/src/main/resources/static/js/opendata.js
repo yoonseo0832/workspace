@@ -35,6 +35,6 @@ const displayOpendata = (data) => {
 		trEl.appendChild(tdEle3);
 		trEl.appendChild(tdEle4);
 		
-		target.appendChile(trEl);				
+		target.appendChild(trEl);				
 	}
 }

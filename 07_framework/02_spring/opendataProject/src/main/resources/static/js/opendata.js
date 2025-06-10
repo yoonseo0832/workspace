@@ -15,9 +15,10 @@ const getAirPollutionV2 = async (page = 1) => {
 	const location = document.getElementById("location").value;
 	
 	// 대기 오염 정보 요청 => 비동기 요청*(fetch)
-	try{const response = await fetch("/airPollution/v2?location="+ location +"&currPage=" + page )
-	const data = await response.json();
-	console.log(data);
+	try{
+		const response = await fetch("/airPollution/v2?location="+ location +"&currPage=" + page )
+		const data = await response.json();
+		console.log(data);
 	
 	// 조회 결과를 화면에 표시
 	displayAirPollutionData(data.items);
@@ -66,7 +67,7 @@ const displayAirPollutionData = (data) => {
 	const target = document.querySelector("#air-list tbody");
 	
 	//전달된 데이터를 활용해 tr 요소 생성
-	let tbodyData = "";
+	//let tbodyData = "";
 	/*
 	for(const item of data){
 		tbodyData +="<tr>"
